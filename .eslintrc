@@ -1,0 +1,12 @@
+{
+  "extends": ["airbnb", "react-app"],
+  "rules": {
+    "no-console": 0,
+    "indent": ["error", 2, { "VariableDeclarator": 2, "SwitchCase": 1 }],
+    "quotes": ["error", "double"],
+    "semi": ["error", "always"],
+    "require-await": "error",
+    "jsx-a11y/href-no-hash": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+  }
+}
