@@ -8,10 +8,8 @@ import { fileLoader, mergeTypes, mergeResolvers } from "merge-graphql-schemas";
 const PORT = 8080;
 const GRAPHQL_ENDPOINT = "/graphql";
 
-// const typeDefs = mergeTypes(fileLoader(path.join(__dirname, "./schemas")));
-// const resolvers = mergeResolvers(fileLoader(path.join(__dirname, "./resolvers")));
-const typeDefs = require("./schemas");
-const resolvers = require("./resolvers");
+const typeDefs = mergeTypes(fileLoader(path.join(__dirname, "./schemas")));
+const resolvers = mergeResolvers(fileLoader(path.join(__dirname, "./resolvers")));
 
 const schema = makeExecutableSchema({
   typeDefs,
