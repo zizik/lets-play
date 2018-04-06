@@ -5,6 +5,8 @@ import { graphqlExpress, graphiqlExpress } from "apollo-server-express";
 import { makeExecutableSchema } from "graphql-tools";
 import { fileLoader, mergeTypes, mergeResolvers } from "merge-graphql-schemas";
 
+import models from "./models";
+
 const PORT = 8080;
 const GRAPHQL_ENDPOINT = "/graphql";
 
@@ -18,7 +20,16 @@ const schema = makeExecutableSchema({
 
 const app = express();
 
-app.use(GRAPHQL_ENDPOINT, bodyParser.json(), graphqlExpress({ schema }));
+app.use(
+  GRAPHQL_ENDPOINT,
+  bodyParser.json(),
+  graphqlExpress(req => ({
+    schema,
+    context: {
+      models,
+    },
+  })),
+);
 app.use("/graphiql", graphiqlExpress({ endpointURL: GRAPHQL_ENDPOINT }));
 
 app.get("/api/hello", (req, res) => {
