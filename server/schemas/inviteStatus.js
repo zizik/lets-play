@@ -4,6 +4,10 @@ export default `
     status: String!
   }
 
+  type Query {
+    getInviteStatus(id: Int!): InviteStatus!
+  }
+
   type Mutation {
     createStatus(status: String!): Boolean!
   }
