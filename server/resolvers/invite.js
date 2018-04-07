@@ -1,4 +1,8 @@
 export default {
+  Query: {
+    getInvite: (parent, { id }, { models }) => models.Invite.findOne({ where: { id } }),
+  },
+
   Mutation: {
     createInvite: async (parent, args, { models }) => {
       try {
