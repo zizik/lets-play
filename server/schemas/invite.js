@@ -7,6 +7,6 @@ export default `
   }
 
   type Mutation {
-    createInvite(userId: Int!, description: String="no description", gameId: Int!): Boolean!
+    createInvite(userId: Int!, description: String!, gameId: Int!): Boolean!
   }
 `;

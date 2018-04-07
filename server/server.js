@@ -36,7 +36,7 @@ app.get("/api/hello", (req, res) => {
   res.send({ express: "Hello From Express" });
 });
 
-models.sequelize.sync({ force: true }).then(() => {
+models.sequelize.sync().then(() => {
   app.listen(PORT, () => {
     console.log("Go to http://localhost:8080/graphiql to run queries!");
   });
