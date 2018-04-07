@@ -1,7 +1,13 @@
 export default (sequelize, DataTypes) => {
   const Channel = sequelize.define("game", {
-    name: DataTypes.STRING,
-    icon: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      unique: true,
+    },
+    icon: {
+      type: DataTypes.STRING,
+      unique: true,
+    },
   });
   return Channel;
 };

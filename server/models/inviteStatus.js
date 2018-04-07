@@ -1,6 +1,9 @@
 export default (sequelize, DataTypes) => {
   const InviteStatus = sequelize.define("InviteStatus", {
-    status: DataTypes.STRING,
+    status: {
+      type: DataTypes.STRING,
+      unique: true,
+    },
   });
   InviteStatus.associate = models => {
     InviteStatus.belongsTo(models.Invite, {
