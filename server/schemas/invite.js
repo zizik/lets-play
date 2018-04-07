@@ -1,5 +1,12 @@
 export default `
-  type Query {
-    invite: String
+  type Invite {
+    id: Int!
+    userId: Int!
+    description: String
+    gameId: Int!
+  }
+
+  type Mutation {
+    createInvite(userId: Int!, description: String="no description", gameId: Int!): Boolean!
   }
 `;

@@ -1,5 +1,12 @@
 export default {
-  Query: {
-    user: (parent, args, context, info) => "usered",
+  Mutation: {
+    createUser: async (parent, args, { models }) => {
+      try {
+        await models.User.create(args);
+        return true;
+      } catch (err) {
+        return false;
+      }
+    },
   },
 };

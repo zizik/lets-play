@@ -1,5 +1,12 @@
 export default {
-  Query: {
-    invite: (parent, args, context, info) => "invited",
+  Mutation: {
+    createInvite: async (parent, args, { models }) => {
+      try {
+        await models.Invite.create(args);
+        return true;
+      } catch (err) {
+        return false;
+      }
+    },
   },
 };
