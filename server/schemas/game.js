@@ -5,7 +5,12 @@ export default `
     icon: String
   }
 
+  type Query {
+    getGame: Game!
+    getAllGames: [Game!]!
+  }
+
   type Mutation {
-    createGame(name: String!, icon: String!): Boolean!
+    createGame(name: String!, icon: String = "No icon"): Boolean!
   }
 `;
