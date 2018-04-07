@@ -1,6 +1,6 @@
 import Sequelize from "sequelize";
 
-const sequelize = new Sequelize("letsplay", "zizik", "555", {
+const sequelize = new Sequelize("letsPlay", "Zizik", "555", {
   dialect: "postgres",
   operatorsAliases: false,
   define: {
@@ -10,11 +10,10 @@ const sequelize = new Sequelize("letsplay", "zizik", "555", {
 
 const models = {
   User: sequelize.import("./user"),
-  // UserStatuses: sequelize.import("./userStatuses"),
-  // Game: sequelize.import("./game"),
-  // Invite: sequelize.import("./invite"),
-  // InviteStatuses: sequelize.import("./inviteStatuses"),
-  // Likes: sequelize.import("./likes"),
+  Game: sequelize.import("./game"),
+  Invite: sequelize.import("./invite"),
+  InviteStatuses: sequelize.import("./inviteStatus"),
+  LikesStatuses: sequelize.import("./likeStatus"),
 };
 
 Object.keys(models).forEach(modelName => {
@@ -22,8 +21,6 @@ Object.keys(models).forEach(modelName => {
     models[modelName].associate(models);
   }
 });
-
-console.log(models);
 
 models.sequelize = sequelize;
 models.Sequelize = Sequelize;

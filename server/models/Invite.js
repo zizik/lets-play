@@ -1,19 +1,24 @@
 export default (sequelize, DataTypes) => {
-  // const Channel = sequelize.define("channel", {
-  //   name: DataTypes.STRING,
-  //   public: DataTypes.BOOLEAN,
-  // });
-  // Channel.associate = models => {
-  //   Channel.belongsTo(models.Team, {
-  //     foreignKey: {
-  //       name: "teamId",
-  //       field: "team_id",
-  //     },
-  //   });
-  //   Channel.belongsToMany(models.User, {
-  //     through: "channel_member",
-  //     foreignKey: { name: "channelId", field: "channel_id" },
-  //   });
-  // };
-  // return Channel;
+  const Invite = sequelize.define("channel", {
+    discription: DataTypes.STRING,
+  });
+  Invite.associate = models => {
+    Invite.belongsTo(models.User, {
+      foreignKey: {
+        name: "userId",
+        field: "user_id",
+      },
+    });
+    Invite.belongsTo(models.Game, {
+      foreignKey: {
+        name: "gameId",
+        field: "game_id",
+      },
+    });
+    Invite.belongsToMany(models.LikeStatus, {
+      through: "invite_status",
+      foreignKey: { name: "inviteId", field: "invite_id" },
+    });
+  };
+  return Invite;
 };
