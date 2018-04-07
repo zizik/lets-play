@@ -8,8 +8,8 @@ export default (sequelize, DataTypes) => {
     password: DataTypes.STRING,
   });
   User.associate = models => {
-    User.belongsToMany(models.LikesStatus, {
-      through: "user_status",
+    User.belongsToMany(models.Invite, {
+      through: "like_statuses",
       foreignKey: { name: "userId", field: "user_id" },
     });
   };

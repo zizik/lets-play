@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  const Invite = sequelize.define("channel", {
+  const Invite = sequelize.define("invite", {
     discription: DataTypes.STRING,
   });
   Invite.associate = models => {
@@ -15,8 +15,8 @@ export default (sequelize, DataTypes) => {
         field: "game_id",
       },
     });
-    Invite.belongsToMany(models.LikeStatus, {
-      through: "invite_status",
+    Invite.belongsToMany(models.User, {
+      through: "like_statuses",
       foreignKey: { name: "inviteId", field: "invite_id" },
     });
   };
