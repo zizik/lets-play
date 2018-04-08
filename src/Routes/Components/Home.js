@@ -1,8 +1,13 @@
 import React from "react";
-// import List, { ListItem, ListItemText } from "material-ui/List";
+import { List } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
-function SimpleList(props) {
-  return <div />;
-}
+const ListExampleBasic = () => (
+  <List>
+    <List.Item>
+      <Link to="/users"> Users </Link>
+    </List.Item>
+  </List>
+);
 
-export default SimpleList;
+export default ListExampleBasic;
