@@ -1,6 +1,7 @@
 export default {
   Query: {
-    getUser: (parent, { id }, { models }) => models.User.findOne({ where: { id } }),
+    // getUser: (parent, { id }, { models }) => models.User.findOne({ where: { id } }),
+    getUser: (parent, { id }, { models }) => models.User.findById(id),
     getAllUsers: (parent, args, { models }) => models.User.findAll(),
   },
 
