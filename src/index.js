@@ -8,11 +8,8 @@ import { ApolloProvider } from "react-apollo";
 import Routes from "./Routes";
 import registerServiceWorker from "./registerServiceWorker";
 
-const httpLink = createHttpLink({
-  uri: "http://localhost:8080/graphql",
-});
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: createHttpLink({ uri: "http://localhost:8080/graphql" }),
   cache: new InMemoryCache(),
 });
 
