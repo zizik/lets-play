@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:8080/",
   "dependencies": {
+    "apollo-cache-inmemory": "^1.1.12",
     "apollo-client": "^2.2.8",
     "apollo-client-preset": "^1.0.8",
     "apollo-link-http": "^1.5.3",
