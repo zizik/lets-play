@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Header, Input, Button, Form, Divider, Table } from "semantic-ui-react";
 import gql from "graphql-tag";
-import { graphql } from "react-apollo";
+import { graphql, compose } from "react-apollo";
 
 class Users extends Component {
   state = {
@@ -18,14 +18,15 @@ class Users extends Component {
 
   onSubmit = async () => {
     const { name, email, password } = this.state;
-    const res = await this.props.mutate({
+    const res = await this.props.createUserMutation({
       variables: { name, email, password },
     });
     console.log(res);
   };
 
   getAllUsers = () => {
-    const { getAllUsers: users } = this.props.data;
+    console.log(this.props);
+    const { getAllUsers: users } = this.props.users;
     this.setState({ users });
   };
 
@@ -88,4 +89,4 @@ const createUserMutation = gql`
   }
 `;
 
-export default graphql(getAllUsers, createUserMutation)(Users);
+export default compose(graphql(getAllUsers, { name: "users" }), graphql(createUserMutation, { name: "createUserMutation" }))(Users);
