@@ -21,8 +21,12 @@ class Games extends Component {
     });
   };
 
+  reloadGames = async () => {
+    await this.props.games.refetch();
+  };
+
   render() {
-    const { loading, getAllGames: games = [] } = this.props.games;
+    const { loading, getAllGames: games } = this.props.games;
     const allGames =
       !loading &&
       games.map(user => (
@@ -57,6 +61,9 @@ class Games extends Component {
           </Table.Header>
           <Table.Body>{allGames}</Table.Body>
         </Table>
+        <Button primary onClick={this.reloadGames}>
+          Submit
+        </Button>
       </Container>
     );
   }
