@@ -6,6 +6,7 @@ const ListExampleBasic = () => (
   <List>
     <List.Item>
       <Link to="/users"> Users </Link>
+      <Link to="/games"> Games </Link>
     </List.Item>
   </List>
 );
