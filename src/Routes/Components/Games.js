@@ -75,11 +75,7 @@ const getAllGames = gql`
 
 const createGameMutation = gql`
   mutation($name: String!, $icon: String) {
-    createGame(name: $name, icon: $icon) {
-      id
-      name
-      icon
-    }
+    createGame(name: $name, icon: $icon)
   }
 `;
 
