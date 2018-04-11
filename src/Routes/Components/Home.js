@@ -7,6 +7,7 @@ const ListExampleBasic = () => (
     <List.Item>
       <Link to="/users"> Users </Link>
       <Link to="/games"> Games </Link>
+      <Link to="/invites"> Invites </Link>
     </List.Item>
   </List>
 );

@@ -5,6 +5,7 @@ import "semantic-ui-css/semantic.min.css";
 import Home from "./Components/Home";
 import Users from "./Components/Users";
 import Games from "./Components/Games";
+import Invites from "./Components/Invites";
 
 export default () => (
   <BrowserRouter>
@@ -12,6 +13,7 @@ export default () => (
       <Route path="/" exact component={Home} />
       <Route path="/users" exact component={Users} />
       <Route path="/games" exact component={Games} />
+      <Route path="/invites" exact component={Invites} />
     </Switch>
   </BrowserRouter>
 );

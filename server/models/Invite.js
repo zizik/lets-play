@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
   const Invite = sequelize.define("invite", {
-    discription: DataTypes.STRING,
+    description: DataTypes.STRING,
   });
   Invite.associate = models => {
     Invite.belongsTo(models.User, {
