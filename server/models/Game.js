@@ -8,7 +8,6 @@ export default (sequelize, DataTypes) => {
       },
       icon: {
         type: DataTypes.STRING,
-        unique: true,
       },
     },
     {

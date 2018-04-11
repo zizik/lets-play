@@ -18,7 +18,7 @@ class Games extends Component {
   onSubmit = async () => {
     const { name, icon } = this.state;
     const res = await this.props.createGameMutation({
-      variables: { name, icon },
+      variables: { name, icon: icon || "No Icon" },
     });
     console.log(res);
   };
