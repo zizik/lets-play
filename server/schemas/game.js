@@ -11,6 +11,6 @@ export default `
   }
 
   type Mutation {
-    createGame(name: String!, icon: String): Boolean!
+    createGame(name: String!, icon: String): Game!
   }
 `;

@@ -7,8 +7,8 @@ export default {
   Mutation: {
     createGame: async (parent, args, { models }) => {
       try {
-        await models.Game.create(args);
-        return true;
+        const game = await models.Game.create(args);
+        return game;
       } catch (err) {
         return false;
       }
