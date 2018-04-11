@@ -1,6 +1,7 @@
 export default {
   Query: {
-    getInvite: (parent, { id }, { models }) => models.Invite.findOne({ where: { id } }),
+    getInvite: (parent, { id }, { models }) => models.Invite.findById(id),
+    getAllInvites: (parent, args, { models }) => models.Invite.findAll(),
   },
 
   Mutation: {

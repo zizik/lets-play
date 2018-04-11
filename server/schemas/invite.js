@@ -8,6 +8,7 @@ export default `
 
   type Query {
     getInvite(id: Int!): Invite!
+    getAllInvites: [Invite]!
   }
 
   type Mutation {
