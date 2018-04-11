@@ -19,14 +19,11 @@ class Games extends Component {
     await this.props.createGameMutation({
       variables: { name, icon: icon || "No Icon" },
     });
-  };
-
-  reloadGames = async () => {
-    await this.props.games.refetch();
+    await this.props.getAllGames.refetch();
   };
 
   render() {
-    const { loading, getAllGames: games } = this.props.games;
+    const { loading, getAllGames: games } = this.props.getAllGames;
     const allGames =
       !loading &&
       games.map(user => (
@@ -61,9 +58,6 @@ class Games extends Component {
           </Table.Header>
           <Table.Body>{allGames}</Table.Body>
         </Table>
-        <Button primary onClick={this.reloadGames}>
-          Submit
-        </Button>
       </Container>
     );
   }
@@ -89,4 +83,4 @@ const createGameMutation = gql`
   }
 `;
 
-export default compose(graphql(getAllGames, { name: "games" }), graphql(createGameMutation, { name: "createGameMutation" }))(Games);
+export default compose(graphql(getAllGames, { name: "getAllGames" }), graphql(createGameMutation, { name: "createGameMutation" }))(Games);
