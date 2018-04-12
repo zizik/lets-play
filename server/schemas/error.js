@@ -1,6 +1,6 @@
 export default `
   type Error {
-    path: String!
+    reason: String!
     message: String
   }
 `;
