@@ -62,13 +62,27 @@ const getAllInvites = gql`
 
 const createInviteMutation = gql`
   mutation($description: String!, $userId: Int!, $gameId: Int!) {
-    createInvite(description: $description, userId: $userId, gameId: $gameId)
+    createInvite(description: $description, userId: $userId, gameId: $gameId) {
+      id
+      description
+      userId
+      gameId
+    }
   }
 `;
 
 export default compose(
   graphql(getAllInvites, { name: "getAllInvites" }),
-  graphql(createInviteMutation, { name: "createInviteMutation" }),
+  graphql(createInviteMutation, {
+    name: "createInviteMutation",
+    options: {
+      update: (proxy, { data: { createInvite } }) => {
+        const data = proxy.readQuery({ query: getAllInvites });
+        data.getAllInvites.push(createInvite);
+        proxy.writeQuery({ query: getAllInvites, data });
+      },
+    },
+  }),
   withFormik({
     mapPropsToValues: props => ({
       description: "",
@@ -79,7 +93,6 @@ export default compose(
       await props.createInviteMutation({
         variables: values,
       });
-      await props.getAllInvites.refetch();
     },
   }),
 )(Invites);
