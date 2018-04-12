@@ -11,7 +11,13 @@ export default `
     getAllInvites: [Invite]!
   }
 
+  type InviteResponse {
+    ok: Boolean!
+    data: Invite
+    errors: [Error!]
+  }
+
   type Mutation {
-    createInvite(userId: Int!, gameId: Int!, description: String): Invite!
+    createInvite(userId: Int!, gameId: Int!, description: String): InviteResponse!
   }
 `;

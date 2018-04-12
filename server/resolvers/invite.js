@@ -1,3 +1,5 @@
+import formatErrors from "../formatErrors";
+
 export default {
   Query: {
     getInvite: (parent, { id }, { models }) => models.Invite.findById(id),
@@ -8,10 +10,15 @@ export default {
     createInvite: async (parent, args, { models }) => {
       try {
         const invite = await models.Invite.create(args);
-        return invite;
+        return {
+          ok: true,
+          data: invite,
+        };
       } catch (err) {
-        console.log(err);
-        return false;
+        return {
+          ok: false,
+          errors: formatErrors(err, models),
+        };
       }
     },
   },
