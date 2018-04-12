@@ -6,9 +6,12 @@ import { makeExecutableSchema } from "graphql-tools";
 import { fileLoader, mergeTypes, mergeResolvers } from "merge-graphql-schemas";
 
 import models from "./models";
+import insertFakeData from "./insertFakeData";
 
 const PORT = 8080;
 const GRAPHQL_ENDPOINT = "/graphql";
+
+const force = false;
 
 const typeDefs = mergeTypes(fileLoader(path.join(__dirname, "./schemas")));
 const resolvers = mergeResolvers(fileLoader(path.join(__dirname, "./resolvers")));
@@ -32,7 +35,10 @@ app.use(
 );
 app.use("/graphiql", graphiqlExpress({ endpointURL: GRAPHQL_ENDPOINT }));
 
-models.sequelize.sync().then(() => {
+models.sequelize.sync({ force }).then(() => {
+  if (force) {
+    insertFakeData(models);
+  }
   app.listen(PORT, () => {
     console.log("Go to http://localhost:8080/graphiql to run queries!");
   });
