@@ -84,9 +84,11 @@ export default compose(
     name: "createInviteMutation",
     options: {
       update: (proxy, { data: { createInvite } }) => {
-        const data = proxy.readQuery({ query: getAllInvites });
-        data.getAllInvites.push(createInvite);
-        proxy.writeQuery({ query: getAllInvites, data });
+        if (createInvite.data) {
+          const data = proxy.readQuery({ query: getAllInvites });
+          data.getAllInvites.push(createInvite.data);
+          proxy.writeQuery({ query: getAllInvites, data });
+        }
       },
     },
   }),
