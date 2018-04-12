@@ -9,7 +9,7 @@ export default (sequelize, DataTypes) => {
         field: "user_id",
       },
     });
-    Invite.belongsTo(models.Game, {
+    Invite.hasOne(models.Game, {
       foreignKey: {
         name: "gameId",
         field: "game_id",
