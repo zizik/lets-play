@@ -10,6 +10,7 @@ export default {
         await models.Invite.create(args);
         return true;
       } catch (err) {
+        console.log(err);
         return false;
       }
     },

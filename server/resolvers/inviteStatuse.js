@@ -9,6 +9,7 @@ export default {
         await models.InviteStatus.create(args);
         return true;
       } catch (err) {
+        console.log(err);
         return false;
       }
     },

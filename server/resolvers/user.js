@@ -11,6 +11,7 @@ export default {
         await models.User.create(args);
         return true;
       } catch (err) {
+        console.log(err);
         return false;
       }
     },
