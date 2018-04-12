@@ -63,10 +63,17 @@ const getAllInvites = gql`
 const createInviteMutation = gql`
   mutation($description: String!, $userId: Int!, $gameId: Int!) {
     createInvite(description: $description, userId: $userId, gameId: $gameId) {
-      id
-      description
-      userId
-      gameId
+      ok
+      data {
+        id
+        description
+        gameId
+        userId
+      }
+      errors {
+        path
+        message
+      }
     }
   }
 `;
