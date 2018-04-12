@@ -7,8 +7,8 @@ export default {
   Mutation: {
     createInvite: async (parent, args, { models }) => {
       try {
-        await models.Invite.create(args);
-        return true;
+        const invite = await models.Invite.create(args);
+        return invite;
       } catch (err) {
         console.log(err);
         return false;
