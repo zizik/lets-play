@@ -11,7 +11,13 @@ export default `
     getAllUsers: [User!]!
   }
 
+  type UserResponse {
+    ok: Boolean!
+    data: User
+    errors: [Error!]
+  }
+
   type Mutation {
-    createUser(name: String!, email: String!, password: String!): Boolean!
+    createUser(name: String!, email: String!, password: String!): UserResponse!
   }
 `;

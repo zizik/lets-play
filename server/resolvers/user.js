@@ -1,6 +1,7 @@
+import formatErrors from "../formatErrors";
+
 export default {
   Query: {
-    // getUser: (parent, { id }, { models }) => models.User.findOne({ where: { id } }),
     getUser: (parent, { id }, { models }) => models.User.findById(id),
     getAllUsers: (parent, args, { models }) => models.User.findAll(),
   },
@@ -8,11 +9,16 @@ export default {
   Mutation: {
     createUser: async (parent, args, { models }) => {
       try {
-        await models.User.create(args);
-        return true;
+        const user = await models.User.create(args);
+        return {
+          ok: true,
+          data: user,
+        };
       } catch (err) {
-        console.log(err);
-        return false;
+        return {
+          ok: false,
+          errors: formatErrors(err, models),
+        };
       }
     },
   },
