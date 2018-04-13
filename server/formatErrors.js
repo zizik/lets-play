@@ -1,5 +1,5 @@
 export default (err, models) => {
-  if (err instanceof models.sequelize.ValidationError) {
+  if (err.name === "SequelizeValidationError") {
     return err.errors.map(e => ({ reason: e.path, message: e.message }));
   }
   console.log(err);

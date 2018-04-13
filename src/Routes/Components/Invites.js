@@ -4,8 +4,7 @@ import gql from "graphql-tag";
 import { graphql, compose } from "react-apollo";
 import { withFormik } from "formik";
 
-const Invites = ({ getAllInvites: { loading, getAllInvites: invites }, submitForm, handleChange, values, ...props }) => {
-  // const { loading, getAllInvites: invites } = getAllInvites;
+const Invites = ({ getAllInvites: { loading, getAllInvites: invites }, submitForm, handleChange, values }) => {
   const allInvites =
     !loading &&
     invites.map(user => (
