@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 import { graphql, compose } from "react-apollo";
 import { withFormik } from "formik";
 
-const Register = ({ submitForm, handleChange, values, errors }) => (
+const Register = ({ submitForm, handleChange, values, errors, isSubmitting }) => (
   <Container text>
     <Form>
       <Header as="h1">Register</Header>
@@ -18,7 +18,7 @@ const Register = ({ submitForm, handleChange, values, errors }) => (
       <Form.Field>
         <Input onChange={handleChange} value={values.password} type="password" name="password" placeholder="Password" fluid />
       </Form.Field>
-      <Button primary onClick={submitForm}>
+      <Button disabled={isSubmitting} primary onClick={submitForm}>
         Submit
       </Button>
     </Form>
@@ -52,7 +52,7 @@ export default compose(
       email: "us",
       password: "us",
     }),
-    handleSubmit: async (values, { props, setErrors }) => {
+    handleSubmit: async (values, { props, setErrors, setSubmitting }) => {
       const { data: { createUser } } = await props.registerMutation({
         variables: values,
       });
@@ -60,6 +60,7 @@ export default compose(
         const errors = createUser.errors.map(err => err.message);
         setErrors(errors);
       }
+      setSubmitting(false);
     },
   }),
 )(Register);
