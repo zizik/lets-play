@@ -9,7 +9,7 @@ const Invites = ({ getAllInvites: { loading, getAllInvites: invites }, submitFor
     !loading &&
     invites.map(user => (
       <Table.Row key={user.id}>
-        <Table.Cell>{user.description}</Table.Cell>
+        <Table.Cell>{user.description || "No description"}</Table.Cell>
         <Table.Cell>{user.userId}</Table.Cell>
         <Table.Cell>{user.gameId}</Table.Cell>
       </Table.Row>
