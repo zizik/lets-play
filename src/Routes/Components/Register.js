@@ -53,10 +53,11 @@ export default compose(
       password: "us",
     }),
     handleSubmit: async (values, { props, setErrors, setSubmitting }) => {
+      setErrors({});
       const { data: { createUser } } = await props.registerMutation({
         variables: values,
       });
-      if (createUser.errors.length) {
+      if (createUser.errors) {
         const errors = createUser.errors.map(err => err.message);
         setErrors(errors);
       }
