@@ -85,7 +85,18 @@ const getAllUsers = gql`
 
 const createUserMutation = gql`
   mutation($name: String!, $email: String!, $password: String!) {
-    createUser(name: $name, email: $email, password: $password)
+    createUser(name: $name, email: $email, password: $password) {
+      ok
+      data {
+        id
+        name
+        email
+      }
+      errors {
+        reason
+        message
+      }
+    }
   }
 `;
 
