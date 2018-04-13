@@ -13,6 +13,9 @@ const ListExampleBasic = () => (
     <List.Item>
       <Link to="/invites"> Invites </Link>
     </List.Item>
+    <List.Item>
+      <Link to="/register"> Register </Link>
+    </List.Item>
   </List>
 );
 
