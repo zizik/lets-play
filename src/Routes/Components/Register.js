@@ -1,13 +1,14 @@
 import React from "react";
-import { Container, Header, Input, Button, Form } from "semantic-ui-react";
+import { Container, Header, Input, Button, Form, Message } from "semantic-ui-react";
 import gql from "graphql-tag";
 import { graphql, compose } from "react-apollo";
 import { withFormik } from "formik";
 
-const Register = ({ submitForm, handleChange, values }) => (
+const Register = ({ submitForm, handleChange, values, errors }) => (
   <Container text>
     <Form>
       <Header as="h1">Register</Header>
+      {errors.length && <Message negative header="You have some propblems" list={errors} />}
       <Form.Field>
         <Input onChange={handleChange} value={values.name} name="name" placeholder="Username" fluid />
       </Form.Field>
@@ -47,14 +48,18 @@ export default compose(
   }),
   withFormik({
     mapPropsToValues: props => ({
-      name: "",
-      email: "",
-      password: "",
+      name: "ur",
+      email: "us",
+      password: "us",
     }),
-    handleSubmit: async (values, { props }) => {
-      await props.registerMutation({
+    handleSubmit: async (values, { props, setErrors }) => {
+      const { data: { createUser } } = await props.registerMutation({
         variables: values,
       });
+      if (createUser.errors.length) {
+        const errors = createUser.errors.map(err => err.message);
+        setErrors(errors);
+      }
     },
   }),
 )(Register);
