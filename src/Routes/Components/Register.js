@@ -48,9 +48,9 @@ export default compose(
   }),
   withFormik({
     mapPropsToValues: props => ({
-      name: "ur",
-      email: "us",
-      password: "us",
+      name: "user22",
+      email: "user22@gmail.ru",
+      password: "user22@gmail.ru",
     }),
     handleSubmit: async (values, { props, setErrors, setSubmitting }) => {
       setErrors({});
