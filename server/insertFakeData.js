@@ -1,3 +1,5 @@
+import bcrypt from "bcrypt";
+
 const users = [
   { name: "test1", email: "test1@test.ru", password: "test1@test.ru" },
   { name: "test2", email: "test2@test.ru", password: "test2@test.ru" },
@@ -27,7 +29,8 @@ const inviteStatuses = [{ status: "No Likes" }, { status: "Has Likes" }];
 
 export default async models => {
   for (const user of users) {
-    await models.User.create(user);
+    const passwordHash = await bcrypt.hash(user.password, 10);
+    await models.User.create({ ...user, ...{ password: passwordHash } });
   }
   for (const game of games) {
     await models.Game.create(game);
