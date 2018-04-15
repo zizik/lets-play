@@ -9,6 +9,7 @@ export default `
   type Query {
     getUser(id: Int!): User!
     getAllUsers: [User!]!
+    login(email: String!, password: String): UserResponse!
   }
 
   type UserResponse {
