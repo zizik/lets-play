@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 
 import formatErrors from "../formatErrors";
-import createTokens from "../jwt";
+import { createTokens } from "../jwt";
 
 export default {
   Query: {
