@@ -9,12 +9,23 @@ export default `
   type Query {
     getUser(id: Int!): User!
     getAllUsers: [User!]!
-    login(email: String!, password: String): UserResponse!
+    login(email: String!, password: String): LoginResponse!
   }
 
   type UserResponse {
     ok: Boolean!
     data: User
+    errors: [Error!]
+  }
+
+  type Tokens  {
+    accessToken: String!
+    refreshToken: String!
+  }
+
+  type LoginResponse {
+    ok: Boolean!
+    data: Tokens
     errors: [Error!]
   }
 
