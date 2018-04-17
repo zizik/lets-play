@@ -7,6 +7,23 @@ export default {
   Query: {
     getUser: (parent, { id }, { models }) => models.User.findById(id),
     getAllUsers: (parent, args, { models }) => models.User.findAll(),
+  },
+
+  Mutation: {
+    createUser: async (parent, args, { models }) => {
+      try {
+        const user = await models.User.create(args);
+        return {
+          ok: true,
+          data: user,
+        };
+      } catch (err) {
+        return {
+          ok: false,
+          errors: formatErrors(err, models),
+        };
+      }
+    },
     login: async (parent, { email, password }, { models, SECRETS }) => {
       try {
         const user = await models.User.findOne({ where: { email }, raw: true });
@@ -31,23 +48,6 @@ export default {
               message: err.message,
             },
           ],
-        };
-      }
-    },
-  },
-
-  Mutation: {
-    createUser: async (parent, args, { models }) => {
-      try {
-        const user = await models.User.create(args);
-        return {
-          ok: true,
-          data: user,
-        };
-      } catch (err) {
-        return {
-          ok: false,
-          errors: formatErrors(err, models),
         };
       }
     },
