@@ -1,14 +1,15 @@
 import bcrypt from "bcrypt";
 
 import formatErrors from "../formatErrors";
+import createTokens from "../jwt";
 
 export default {
   Query: {
     getUser: (parent, { id }, { models }) => models.User.findById(id),
     getAllUsers: (parent, args, { models }) => models.User.findAll(),
-    login: async (parent, { email, password }, { models }) => {
+    login: async (parent, { email, password }, { models, SECRETS }) => {
       try {
-        const user = await models.User.findOne({ where: { email } });
+        const user = await models.User.findOne({ where: { email }, raw: true });
         if (!user) {
           throw new Error("Cannot find user with this email");
         }
@@ -16,9 +17,10 @@ export default {
         if (!isPasswordsEqual) {
           throw new Error("Passwords not equal");
         }
+        const tokens = await createTokens(user, SECRETS);
         return {
           ok: true,
-          data: user,
+          data: tokens,
         };
       } catch (err) {
         return {
