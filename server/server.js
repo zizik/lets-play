@@ -14,7 +14,7 @@ const PORT = 8080;
 const GRAPHQL_ENDPOINT = "/graphql";
 const SECRETS = {
   accessToken: "ioihergb3b434y9bvsdv0",
-  refreshToken: "auihe9f8h23rh2bfk23k3b",
+  refreshToken: "auihe9f8h23rh2bfk23k3b2",
 };
 
 const force = false;
@@ -36,6 +36,7 @@ const addUserMiddleware = async (req, res, next) => {
     } catch (err) {
       const refreshToken = req.headers["x-refresh-token"];
       const newTokens = await refreshTokens(token, refreshToken, models, SECRETS);
+      console.log(newTokens);
       if (newTokens.token && newTokens.refreshToken) {
         res.set("Access-Control-Expose-Headers", "x-token, x-refresh-token");
         res.set("x-token", newTokens.token);
@@ -49,6 +50,7 @@ const addUserMiddleware = async (req, res, next) => {
 
 const app = express();
 
+app.use(addUserMiddleware);
 app.use(
   GRAPHQL_ENDPOINT,
   bodyParser.json(),
@@ -56,12 +58,11 @@ app.use(
     schema,
     context: {
       models,
+      user: req.user,
       SECRETS,
     },
   })),
 );
-
-app.use(addUserMiddleware);
 
 app.use("/graphiql", graphiqlExpress({ endpointURL: GRAPHQL_ENDPOINT }));
 

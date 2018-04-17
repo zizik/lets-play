@@ -1,20 +1,20 @@
 import jwt from "jsonwebtoken";
 
 export function createTokens({ id }, secrets) {
-  console.log("creating");
+  const user = { id };
   const accessToken = jwt.sign(
     {
-      user: id,
+      user,
     },
     secrets.accessToken,
     {
-      expiresIn: "1h",
+      expiresIn: "1s",
     },
   );
 
   const refreshToken = jwt.sign(
     {
-      user: id,
+      user,
     },
     secrets.refreshToken,
     {
@@ -26,34 +26,20 @@ export function createTokens({ id }, secrets) {
 }
 
 export async function refreshTokens(token, refreshToken, models, secrets) {
-  console.log("refreshing");
-  let userId = 0;
   try {
-    const { user: { id } } = jwt.decode(refreshToken);
-    userId = id;
+    const { user: { id } } = jwt.decode(token);
+    const user = await models.User.findOne({ where: { id }, raw: true });
+    if (!user) {
+      throw new Error();
+    }
+    const tokens = await createTokens(user, secrets);
+    return {
+      ...tokens,
+      user: {
+        id: user.id,
+      },
+    };
   } catch (err) {
     return {};
   }
-
-  if (!userId) {
-    return {};
-  }
-
-  const user = await models.User.findOne({ where: { id: userId }, raw: true });
-
-  if (!user) {
-    return {};
-  }
-
-  try {
-    jwt.verify(refreshToken, secrets.refreshSecret);
-  } catch (err) {
-    return {};
-  }
-
-  const tokens = await createTokens(user, secrets);
-  return {
-    ...tokens,
-    user,
-  };
 }
