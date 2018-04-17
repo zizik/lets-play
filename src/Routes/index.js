@@ -7,6 +7,7 @@ import Users from "./Components/Users";
 import Games from "./Components/Games";
 import Invites from "./Components/Invites";
 import Register from "./Components/Register";
+import Login from "./Components/Login";
 
 export default () => (
   <BrowserRouter>
@@ -16,6 +17,7 @@ export default () => (
       <Route path="/games" exact component={Games} />
       <Route path="/invites" exact component={Invites} />
       <Route path="/register" exact component={Register} />
+      <Route path="/login" exact component={Login} />
     </Switch>
   </BrowserRouter>
 );
