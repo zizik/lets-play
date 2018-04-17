@@ -52,7 +52,11 @@ export default compose(
       const { data: { login } } = await props.loginMutation({
         variables: values,
       });
-      if (login.errors) {
+      if (login.ok) {
+        const { accessToken, refreshToken } = login.data;
+        localStorage.setItem("token", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+      } else {
         const errors = login.errors.map(err => err.message);
         setErrors(errors);
       }
