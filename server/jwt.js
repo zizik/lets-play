@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
-export function createTokens({ id }, secrets) {
-  const user = { id };
+export function createTokens(user, secrets) {
+  const newRefreshSecret = user.password + secrets.refreshToken;
   const accessToken = jwt.sign(
     {
       user,
@@ -16,7 +16,7 @@ export function createTokens({ id }, secrets) {
     {
       user,
     },
-    secrets.refreshToken,
+    newRefreshSecret,
     {
       expiresIn: "7d",
     },
@@ -32,6 +32,8 @@ export async function refreshTokens(token, refreshToken, models, secrets) {
     if (!user) {
       throw new Error();
     }
+    const newRefreshSecret = user.password + secrets.refreshToken;
+    jwt.verify(refreshToken, newRefreshSecret);
     const tokens = await createTokens(user, secrets);
     return {
       ...tokens,
