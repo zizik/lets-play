@@ -10,6 +10,10 @@ import insertFakeData from "./insertFakeData";
 
 const PORT = 8080;
 const GRAPHQL_ENDPOINT = "/graphql";
+const SECRETS = {
+  accessToken: "ioihergb3b434y9bvsdv0",
+  refreshToken: "auihe9f8h23rh2bfk23k3b",
+};
 
 const force = false;
 
@@ -30,6 +34,7 @@ app.use(
     schema,
     context: {
       models,
+      SECRETS,
     },
   })),
 );
