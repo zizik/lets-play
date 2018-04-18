@@ -1,25 +1,70 @@
 import React from "react";
-import { List } from "semantic-ui-react";
+// import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Accordion } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import AppBar from "material-ui/AppBar";
+import Toolbar from "material-ui/Toolbar";
+import Typography from "material-ui/Typography";
 
-const ListExampleBasic = () => (
-  <List>
-    <List.Item>
-      <Link to="/users"> Users </Link>
-    </List.Item>
-    <List.Item>
-      <Link to="/games"> Games </Link>
-    </List.Item>
-    <List.Item>
-      <Link to="/invites"> Invites </Link>
-    </List.Item>
-    <List.Item>
-      <Link to="/register"> Register </Link>
-    </List.Item>
-    <List.Item>
-      <Link to="/login"> Login </Link>
-    </List.Item>
-  </List>
-);
+import IconButton from "material-ui/IconButton";
+import MenuIcon from "material-ui-icons/Menu";
+import List, { ListItem, ListItemText } from "material-ui/List";
+import Drawer from "material-ui/Drawer";
 
-export default ListExampleBasic;
+import styled from "styled-components";
+
+const NavPanel = styled("div")`
+  width: 250px;
+`;
+
+const linkItems = [
+  {
+    name: "Home",
+    route: "/",
+  },
+  {
+    name: "Form",
+    route: "/form",
+  },
+];
+
+class Home extends React.Component {
+  state = {
+    open: false,
+  };
+
+  toggleDrawer = () => {
+    this.setState({
+      open: !this.state.open,
+    });
+  };
+
+  render() {
+    const links = linkItems.map(link => (
+      <ListItem key={link.name} component={Link} to={link.route}>
+        <ListItemText primary={link.name} />
+      </ListItem>
+    ));
+
+    return (
+      <AppBar position="static" color="default">
+        <Toolbar>
+          <div>
+            <IconButton color="inherit" aria-label="open navigation" onClick={this.toggleDrawer}>
+              <MenuIcon />
+            </IconButton>
+            <Drawer open={this.state.open} onClose={this.toggleDrawer}>
+              <NavPanel tabIndex={0} role="button" onClick={this.toggleDrawer} onKeyDown={this.toggleDrawer}>
+                <List component="nav">{links}</List>
+              </NavPanel>
+            </Drawer>
+          </div>
+          <Typography variant="title" color="inherit">
+            Title
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    );
+  }
+}
+
+export default Home;
