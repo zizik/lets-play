@@ -22,8 +22,24 @@ const linkItems = [
     route: "/",
   },
   {
-    name: "Form",
-    route: "/form",
+    name: "Users",
+    route: "/users",
+  },
+  {
+    name: "Games",
+    route: "/games",
+  },
+  {
+    name: "Invites",
+    route: "/invites",
+  },
+  {
+    name: "Register",
+    route: "/register",
+  },
+  {
+    name: "Login",
+    route: "/login",
   },
 ];
 
