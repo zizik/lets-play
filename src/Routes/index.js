@@ -12,14 +12,16 @@ import Login from "./Components/Login";
 
 export default props => (
   <BrowserRouter>
-    <Switch>
+    <div>
       <Header />
-      <Route path="/" exact component={Home} />
-      <Route path="/users" exact component={Users} />
-      <Route path="/games" exact component={Games} />
-      <Route path="/invites" exact component={Invites} />
-      <Route path="/register" exact component={Register} />
-      <Route path="/login" exact component={Login} />
-    </Switch>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/users" exact component={Users} />
+        <Route path="/games" exact component={Games} />
+        <Route path="/invites" exact component={Invites} />
+        <Route path="/register" exact component={Register} />
+        <Route path="/login" exact component={Login} />
+      </Switch>
+    </div>
   </BrowserRouter>
 );
