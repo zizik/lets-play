@@ -1,86 +1,43 @@
 import React from "react";
-// import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Accordion } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import AppBar from "material-ui/AppBar";
-import Toolbar from "material-ui/Toolbar";
+import { withStyles } from "material-ui/styles";
+import ExpansionPanel, { ExpansionPanelSummary, ExpansionPanelDetails } from "material-ui/ExpansionPanel";
 import Typography from "material-ui/Typography";
+import ExpandMoreIcon from "material-ui-icons/ExpandMore";
+import Divider from "material-ui/Divider";
+import InviteList from "./InvitesList";
 
-import IconButton from "material-ui/IconButton";
-import MenuIcon from "material-ui-icons/Menu";
-import List, { ListItem, ListItemText } from "material-ui/List";
-import Drawer from "material-ui/Drawer";
-
-import styled from "styled-components";
-
-const NavPanel = styled("div")`
-  width: 250px;
-`;
-
-const linkItems = [
-  {
-    name: "Home",
-    route: "/",
+const styles = theme => ({
+  root: {
+    padding: 0,
   },
-  {
-    name: "Users",
-    route: "/users",
-  },
-  {
-    name: "Games",
-    route: "/games",
-  },
-  {
-    name: "Invites",
-    route: "/invites",
-  },
-  {
-    name: "Register",
-    route: "/register",
-  },
-  {
-    name: "Login",
-    route: "/login",
-  },
-];
+});
 
-class Home extends React.Component {
-  state = {
-    open: false,
-  };
+function Invites(props) {
+  const { classes } = props;
 
-  toggleDrawer = () => {
-    this.setState({
-      open: !this.state.open,
-    });
-  };
-
-  render() {
-    const links = linkItems.map(link => (
-      <ListItem key={link.name} component={Link} to={link.route}>
-        <ListItemText primary={link.name} />
-      </ListItem>
-    ));
-
-    return (
-      <AppBar position="static" color="default">
-        <Toolbar>
-          <div>
-            <IconButton color="inherit" aria-label="open navigation" onClick={this.toggleDrawer}>
-              <MenuIcon />
-            </IconButton>
-            <Drawer open={this.state.open} onClose={this.toggleDrawer}>
-              <NavPanel tabIndex={0} role="button" onClick={this.toggleDrawer} onKeyDown={this.toggleDrawer}>
-                <List component="nav">{links}</List>
-              </NavPanel>
-            </Drawer>
-          </div>
-          <Typography variant="title" color="inherit">
-            Title
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    );
-  }
+  return (
+    <div>
+      <ExpansionPanel defaultExpanded>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography>Свои приглашения</Typography>
+        </ExpansionPanelSummary>
+        <Divider />
+        <ExpansionPanelDetails className={classes.root}>
+          <InviteList />
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+      <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography>Приглашения друзей</Typography>
+        </ExpansionPanelSummary>
+        <Divider />
+        <ExpansionPanelDetails className={classes.root}>
+          <InviteList />
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+    </div>
+  );
 }
 
-export default Home;
+// export default Invites;
+export default withStyles(styles)(Invites);
