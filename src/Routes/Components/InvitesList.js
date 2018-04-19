@@ -17,8 +17,9 @@ class InvitesList extends Component {
   };
 
   componentWillReceiveProps({ getAllInvites: { loading, getAllInvites: invites } }) {
-    if (this.props.getAllInvites.loading !== loading) {
-      this.setState(invites);
+    if (!loading && this.props.getAllInvites.loading !== loading) {
+      this.setState({ invites });
+      console.log(invites);
     }
   }
 
