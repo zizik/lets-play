@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import List from "material-ui/List";
 import Divider from "material-ui/Divider";
 import styled from "styled-components";
+import gql from "graphql-tag";
+import { graphql } from "react-apollo";
+
 import InviteItem from "./InviteItem";
-// import Api from "../../api/api";
 
 const StyledList = styled(List)`
   width: 100%;
@@ -14,13 +16,14 @@ class InvitesList extends Component {
     invites: [],
   };
 
-  // async componentWillMount() {
-  //   const invites = (await Api.getIvites()) || {};
-  //   // const invites = await Api.addInvite({ game: "Overwatch", time: 3000 });
-  //   this.setState({ invites: Object.values(invites) });
-  // }
+  componentWillReceiveProps({ getAllInvites: { loading, getAllInvites: invites } }) {
+    if (this.props.getAllInvites.loading !== loading) {
+      this.setState(invites);
+    }
+  }
 
   render() {
+    console.log(this.state);
     const invitesItems = this.state.invites.map(invite => <InviteItem key={invite.id} />);
     return (
       <StyledList>
@@ -31,4 +34,15 @@ class InvitesList extends Component {
   }
 }
 
-export default InvitesList;
+const getAllInvites = gql`
+  query {
+    getAllInvites {
+      id
+      description
+      userId
+      gameId
+    }
+  }
+`;
+
+export default graphql(getAllInvites, { name: "getAllInvites" })(InvitesList);
