@@ -4,6 +4,7 @@ export default `
     userId: Int!
     description: String
     gameId: Int!
+    game: Game!
   }
 
   type Query {
