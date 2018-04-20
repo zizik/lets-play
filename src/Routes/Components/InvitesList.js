@@ -19,13 +19,12 @@ class InvitesList extends Component {
   componentWillReceiveProps({ getAllInvites: { loading, getAllInvites: invites } }) {
     if (!loading && this.props.getAllInvites.loading !== loading) {
       this.setState({ invites });
-      console.log(invites);
     }
   }
 
   render() {
     console.log(this.state);
-    const invitesItems = this.state.invites.map(invite => <InviteItem key={invite.id} />);
+    const invitesItems = this.state.invites.map(invite => <InviteItem key={invite.id} invite={invite} />);
     return (
       <StyledList>
         <Divider light />
