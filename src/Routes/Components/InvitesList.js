@@ -23,7 +23,6 @@ class InvitesList extends Component {
   }
 
   render() {
-    console.log(this.state);
     const invitesItems = this.state.invites.map(invite => <InviteItem key={invite.id} invite={invite} />);
     return (
       <StyledList>
@@ -38,9 +37,12 @@ const getAllInvites = gql`
   query {
     getAllInvites {
       id
-      description
       userId
-      gameId
+      description
+      game {
+        name
+        icon
+      }
     }
   }
 `;
