@@ -1,5 +1,4 @@
 import formatErrors from "../formatErrors";
-import { formatError } from "graphql";
 
 export default {
   Query: {
