@@ -1,4 +1,5 @@
 import formatErrors from "../formatErrors";
+import { formatError } from "graphql";
 
 export default {
   Query: {
@@ -18,6 +19,22 @@ export default {
         return {
           ok: false,
           errors: formatErrors(err, models),
+        };
+      }
+    },
+    deleteInvite: async (parent, { id }, { models }) => {
+      try {
+        const isDeleted = await models.Invite.destroy({ where: { id } });
+        if (!isDeleted) {
+          throw new Error("Can't find invite with this id");
+        }
+        return {
+          ok: true,
+        };
+      } catch (err) {
+        return {
+          ok: false,
+          errors: [{ reason: "Delete invite", message: err.message }],
         };
       }
     },
