@@ -23,10 +23,13 @@ class InvitesList extends Component {
   }
 
   handleDeleteInvite = id => async () => {
-    const deleted = await this.props.deleteInviteMutation({
+    const response = await this.props.deleteInviteMutation({
       variables: { id },
     });
-    console.log(deleted);
+    if (response.data.deleteInvite.ok) {
+      const newList = this.state.invites.filter(invite => invite.id !== id);
+      this.setState({ invites: newList });
+    }
   };
 
   render() {
