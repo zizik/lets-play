@@ -3,7 +3,10 @@ export default (sequelize, DataTypes) => {
     "invite",
     {
       description: DataTypes.STRING,
-      created_at: DataTypes.DATE,
+      created_at: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+      },
       expired_at: DataTypes.DATE,
     },
     {
