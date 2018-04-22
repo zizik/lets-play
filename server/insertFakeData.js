@@ -1,4 +1,9 @@
 import bcrypt from "bcrypt";
+import moment from "moment";
+
+const expiredDate = moment(new Date())
+  .add(3, "hours")
+  .format("YYYY-MM-DD HH:mm:ss");
 
 const users = [
   { name: "test1", email: "test1@test.ru", password: "test1@test.ru" },
@@ -17,12 +22,12 @@ const games = [
 ];
 
 const invites = [
-  { userId: 1, gameId: 2, description: "No description" },
-  { userId: 2, gameId: 3, description: "No description" },
-  { userId: 2, gameId: 1, description: "No description" },
-  { userId: 1, gameId: 3, description: "No description" },
-  { userId: 4, gameId: 2, description: "No description" },
-  { userId: 4, gameId: 2, description: "No description" }, // In future should be error
+  { userId: 1, gameId: 2, description: "No description", expired_at: expiredDate },
+  { userId: 2, gameId: 3, description: "No description", expired_at: expiredDate },
+  { userId: 2, gameId: 1, description: "No description", expired_at: expiredDate },
+  { userId: 1, gameId: 3, description: "No description", expired_at: expiredDate },
+  { userId: 4, gameId: 2, description: "No description", expired_at: expiredDate },
+  { userId: 4, gameId: 2, description: "No description", expired_at: expiredDate }, // In future should be error
 ];
 
 const inviteStatuses = [{ status: "No Likes" }, { status: "Has Likes" }];
