@@ -1,7 +1,15 @@
 export default (sequelize, DataTypes) => {
-  const Invite = sequelize.define("invite", {
-    description: DataTypes.STRING,
-  });
+  const Invite = sequelize.define(
+    "invite",
+    {
+      description: DataTypes.STRING,
+      created_at: DataTypes.DATE,
+      expired_at: DataTypes.DATE,
+    },
+    {
+      timestamps: false,
+    },
+  );
   Invite.associate = models => {
     Invite.belongsTo(models.User, {
       foreignKey: {
