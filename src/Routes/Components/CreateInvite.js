@@ -23,20 +23,6 @@ const Invites = ({ submitForm, handleChange, values }) => (
         </label>
       </Form.Field>
       <Form.Field>
-        <label htmlFor="user_id">
-          User Id
-          <Input
-            id="user_id"
-            onChange={handleChange}
-            value={values.userId}
-            type="number"
-            name="userId"
-            placeholder="User Id"
-            fluid
-          />
-        </label>
-      </Form.Field>
-      <Form.Field>
         <label htmlFor="game_id">
           Game Id
           <Input

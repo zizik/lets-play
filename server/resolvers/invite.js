@@ -7,9 +7,9 @@ export default {
   },
 
   Mutation: {
-    createInvite: async (parent, args, { models }) => {
+    createInvite: async (parent, args, { models, user }) => {
       try {
-        const invite = await models.Invite.create(args);
+        const invite = await models.Invite.create({ ...args, userId: user.id });
         return {
           ok: true,
           data: invite,
