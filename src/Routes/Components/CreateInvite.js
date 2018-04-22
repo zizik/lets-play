@@ -10,33 +10,45 @@ const Invites = ({ submitForm, handleChange, values }) => (
     <Form>
       <Header as="h2">Create Invite</Header>
       <Form.Field>
-        <Input
-          onChange={handleChange}
-          value={values.description}
-          name="description"
-          placeholder="Invite description"
-          fluid
-        />
+        <label htmlFor="description">
+          Description
+          <Input
+            id="description"
+            onChange={handleChange}
+            value={values.description}
+            name="description"
+            placeholder="Invite description"
+            fluid
+          />
+        </label>
       </Form.Field>
       <Form.Field>
-        <Input
-          onChange={handleChange}
-          value={values.userId}
-          type="number"
-          name="userId"
-          placeholder="User Id"
-          fluid
-        />
+        <label htmlFor="user_id">
+          User Id
+          <Input
+            id="user_id"
+            onChange={handleChange}
+            value={values.userId}
+            type="number"
+            name="userId"
+            placeholder="User Id"
+            fluid
+          />
+        </label>
       </Form.Field>
       <Form.Field>
-        <Input
-          onChange={handleChange}
-          value={values.gameId}
-          type="number"
-          name="gameId"
-          placeholder="Game Id"
-          fluid
-        />
+        <label htmlFor="game_id">
+          Game Id
+          <Input
+            id="game_id"
+            onChange={handleChange}
+            value={values.gameId}
+            type="number"
+            name="gameId"
+            placeholder="Game Id"
+            fluid
+          />
+        </label>
       </Form.Field>
       <Button primary onClick={submitForm}>
         Submit
