@@ -1,5 +1,4 @@
 import React from "react";
-// import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Accordion } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import AppBar from "material-ui/AppBar";
 import Toolbar from "material-ui/Toolbar";
@@ -30,8 +29,8 @@ const linkItems = [
     route: "/games",
   },
   {
-    name: "Invites",
-    route: "/invites",
+    name: "Create Invite",
+    route: "/create-invite",
   },
   {
     name: "Register",
@@ -69,7 +68,12 @@ class Home extends React.Component {
               <MenuIcon />
             </IconButton>
             <Drawer open={this.state.open} onClose={this.toggleDrawer}>
-              <NavPanel tabIndex={0} role="button" onClick={this.toggleDrawer} onKeyDown={this.toggleDrawer}>
+              <NavPanel
+                tabIndex={0}
+                role="button"
+                onClick={this.toggleDrawer}
+                onKeyDown={this.toggleDrawer}
+              >
                 <List component="nav">{links}</List>
               </NavPanel>
             </Drawer>
