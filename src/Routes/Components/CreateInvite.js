@@ -1,46 +1,29 @@
 import React from "react";
-import { Container, Header, Input, Button, Form } from "semantic-ui-react";
+import Input, { InputLabel } from "material-ui/Input";
+import { FormControl, FormHelperText } from "material-ui/Form";
+import Typography from "material-ui/Typography";
+import Button from "material-ui/Button";
 import gql from "graphql-tag";
 import { graphql, compose } from "react-apollo";
 import { withFormik } from "formik";
 
-const Invites = ({ submitForm, handleChange, values }) => (
-  <Container text>
-    <Header as="h1">Invites</Header>
-    <Form>
-      <Header as="h2">Create Invite</Header>
-      <Form.Field>
-        <label htmlFor="description">
-          Description
-          <Input
-            id="description"
-            onChange={handleChange}
-            value={values.description}
-            name="description"
-            placeholder="Invite description"
-            fluid
-          />
-        </label>
-      </Form.Field>
-      <Form.Field>
-        <label htmlFor="game_id">
-          Game Id
-          <Input
-            id="game_id"
-            onChange={handleChange}
-            value={values.gameId}
-            type="number"
-            name="gameId"
-            placeholder="Game Id"
-            fluid
-          />
-        </label>
-      </Form.Field>
-      <Button primary onClick={submitForm}>
-        Submit
-      </Button>
-    </Form>
-  </Container>
+const Invites = ({ handleSubmit, handleChange, values, ...rest }) => (
+  <form>
+    <Typography variant="title" gutterBottom align="center">
+      Create Invite
+    </Typography>
+    <FormControl margin="normal" fullWidth>
+      <InputLabel htmlFor="description">Description</InputLabel>
+      <Input id="description" value={values.description} onChange={handleChange} />
+    </FormControl>
+    <FormControl margin="normal" fullWidth>
+      <InputLabel htmlFor="gameId">Game Id</InputLabel>
+      <Input id="gameId" value={values.gameId} onChange={handleChange} />
+    </FormControl>
+    <Button onClick={handleSubmit} color="primary" variant="raised">
+      Submit
+    </Button>
+  </form>
 );
 
 const createInviteMutation = gql`
@@ -83,7 +66,7 @@ export default compose(
       userId: 1,
       gameId: 1,
     }),
-    handleSubmit: async (values, { props }) => {
+    handleSubmit: async (values, { props }, rest) => {
       await props.createInviteMutation({
         variables: values,
       });
