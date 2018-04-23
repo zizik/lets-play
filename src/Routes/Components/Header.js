@@ -3,16 +3,18 @@ import { Link } from "react-router-dom";
 import AppBar from "material-ui/AppBar";
 import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
-
 import IconButton from "material-ui/IconButton";
 import MenuIcon from "material-ui-icons/Menu";
 import List, { ListItem, ListItemText } from "material-ui/List";
 import Drawer from "material-ui/Drawer";
-
 import styled from "styled-components";
 
 const NavPanel = styled("div")`
   width: 250px;
+`;
+
+const HeaderPanel = styled(AppBar)`
+  margin-bottom: 20px;
 `;
 
 const linkItems = [
@@ -61,7 +63,7 @@ class Home extends React.Component {
     ));
 
     return (
-      <AppBar position="static" color="default">
+      <HeaderPanel position="static" color="default">
         <Toolbar>
           <div>
             <IconButton color="inherit" aria-label="open navigation" onClick={this.toggleDrawer}>
@@ -82,7 +84,7 @@ class Home extends React.Component {
             Title
           </Typography>
         </Toolbar>
-      </AppBar>
+      </HeaderPanel>
     );
   }
 }

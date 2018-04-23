@@ -6,6 +6,13 @@ import Button from "material-ui/Button";
 import gql from "graphql-tag";
 import { graphql, compose } from "react-apollo";
 import { withFormik } from "formik";
+import styled from "styled-components";
+
+const StyledButton = styled(Button)`
+  && {
+    margin-top: 15px;
+  }
+`;
 
 const Invites = ({ handleSubmit, handleChange, values, ...rest }) => (
   <form>
@@ -20,9 +27,9 @@ const Invites = ({ handleSubmit, handleChange, values, ...rest }) => (
       <InputLabel htmlFor="gameId">Game Id</InputLabel>
       <Input id="gameId" value={values.gameId} onChange={handleChange} />
     </FormControl>
-    <Button onClick={handleSubmit} color="primary" variant="raised">
+    <StyledButton onClick={handleSubmit} color="primary" variant="raised">
       Submit
-    </Button>
+    </StyledButton>
   </form>
 );
 
