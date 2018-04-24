@@ -10,10 +10,13 @@ export default {
   Mutation: {
     createInvite: async (parent, args, { models, user }) => {
       try {
-        const invite = await models.Invite.create({ ...args, userId: user.id });
+        const invite = await models.Invite.create({ ...args, userId: user.id }).then(inv =>
+          inv.get({ plain: true }),
+        );
+        const game = await models.Game.findById(invite.gameId, { raw: true });
         return {
           ok: true,
-          data: invite,
+          data: { ...invite, ...game },
         };
       } catch (err) {
         return {
@@ -40,7 +43,7 @@ export default {
     },
   },
 
-  Invite: {
-    game: (parent, args, { models }) => models.Game.findById(parent.gameId),
-  },
+  // Invite: {
+  //   game: (parent, args, { models }) => models.Game.findById(parent.gameId),
+  // },
 };
