@@ -3,7 +3,8 @@ import formatErrors from "../formatErrors";
 export default {
   Query: {
     getInvite: (parent, { id }, { models }) => models.Invite.findById(id),
-    getAllInvites: (parent, args, { models }) => models.Invite.findAll(),
+    getAllInvites: (parent, args, { models, user }) =>
+      models.Invite.findAll({ where: { userId: user.id } }),
   },
 
   Mutation: {

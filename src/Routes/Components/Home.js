@@ -33,5 +33,4 @@ function Invites(props) {
   );
 }
 
-// export default Invites;
 export default withStyles(styles)(Invites);
