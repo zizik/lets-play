@@ -4,7 +4,7 @@ export default {
   Query: {
     getInvite: (parent, { id }, { models }) => models.Invite.findById(id),
     getAllInvites: (parent, args, { models, user }) =>
-      models.Invite.findAll({ where: { userId: user.id } }),
+      models.Invite.findAll({ where: { userId: user.id }, include: models.Game }),
   },
 
   Mutation: {

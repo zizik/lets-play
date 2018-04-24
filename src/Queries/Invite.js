@@ -6,6 +6,7 @@ export const getAllInvites = gql`
       id
       userId
       description
+      gameId
       game {
         name
         icon
