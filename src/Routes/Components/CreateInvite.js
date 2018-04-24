@@ -34,8 +34,8 @@ const Invites = ({ handleSubmit, handleChange, values, ...rest }) => (
 );
 
 const createInviteMutation = gql`
-  mutation($description: String!, $userId: Int!, $gameId: Int!) {
-    createInvite(description: $description, userId: $userId, gameId: $gameId) {
+  mutation($description: String!, $gameId: Int!) {
+    createInvite(description: $description, gameId: $gameId) {
       ok
       data {
         id
@@ -70,7 +70,6 @@ export default compose(
   withFormik({
     mapPropsToValues: props => ({
       description: "",
-      userId: 1,
       gameId: 1,
     }),
     handleSubmit: async (values, { props }, rest) => {

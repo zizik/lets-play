@@ -19,7 +19,7 @@ export default `
   }
 
   type Mutation {
-    createInvite(userId: Int!, gameId: Int!, description: String): InviteResponse!
+    createInvite(gameId: Int!, description: String): InviteResponse!
     deleteInvite(id: Int!): InviteResponse!
   }
 `;
