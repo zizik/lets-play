@@ -1,6 +1,6 @@
 import React from "react";
 import Input, { InputLabel } from "material-ui/Input";
-import { FormControl, FormHelperText } from "material-ui/Form";
+import { FormControl } from "material-ui/Form";
 import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";
 import gql from "graphql-tag";
