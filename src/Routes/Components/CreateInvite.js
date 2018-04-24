@@ -74,9 +74,12 @@ export default compose(
       gameId: 1,
     }),
     handleSubmit: async (values, { props }, rest) => {
-      await props.createInviteMutation({
+      const { data: { createInvite } } = await props.createInviteMutation({
         variables: values,
       });
+      if (createInvite.ok) {
+        props.history.push("/");
+      }
     },
   }),
 )(Invites);
