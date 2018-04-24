@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import List from "material-ui/List";
 import Divider from "material-ui/Divider";
 import styled from "styled-components";
-import gql from "graphql-tag";
 import { graphql, compose } from "react-apollo";
 
 import InviteItem from "./InviteItem";
+import { getAllInvites, deleteInviteMutation } from "../../Queries/Invite";
 
 const StyledList = styled(List)`
   width: 100%;
@@ -44,32 +44,6 @@ class InvitesList extends Component {
     );
   }
 }
-
-const getAllInvites = gql`
-  query {
-    getAllInvites {
-      id
-      userId
-      description
-      game {
-        name
-        icon
-      }
-    }
-  }
-`;
-
-const deleteInviteMutation = gql`
-  mutation($id: Int!) {
-    deleteInvite(id: $id) {
-      ok
-      errors {
-        reason
-        message
-      }
-    }
-  }
-`;
 
 export default compose(
   graphql(deleteInviteMutation, { name: "deleteInviteMutation" }),
