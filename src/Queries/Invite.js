@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const getAllInvites = gql`
+export const GET_ALL_INVITES = gql`
   query {
     getAllInvites {
       id
@@ -15,7 +15,7 @@ export const getAllInvites = gql`
   }
 `;
 
-export const deleteInviteMutation = gql`
+export const DELETE_INVITE_MUTATION = gql`
   mutation($id: Int!) {
     deleteInvite(id: $id) {
       ok
@@ -30,7 +30,7 @@ export const deleteInviteMutation = gql`
   }
 `;
 
-export const createInviteMutation = gql`
+export const CREATE_INVITE_MUTATION = gql`
   mutation($description: String!, $gameId: Int!) {
     createInvite(description: $description, gameId: $gameId) {
       ok

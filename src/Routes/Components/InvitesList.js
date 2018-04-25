@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { graphql } from "react-apollo";
 
 import InviteItem from "./InviteItem";
-import { getAllInvites } from "../../Queries/Invite";
+import { GET_ALL_INVITES } from "../../Queries/Invite";
 
 const StyledList = styled(List)`
   width: 100%;
@@ -40,4 +40,4 @@ class InvitesList extends Component {
   }
 }
 
-export default graphql(getAllInvites, { name: "getAllInvites" })(InvitesList);
+export default graphql(GET_ALL_INVITES, { name: "getAllInvites" })(InvitesList);

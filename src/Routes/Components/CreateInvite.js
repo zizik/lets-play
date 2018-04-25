@@ -7,7 +7,7 @@ import { graphql, compose } from "react-apollo";
 import { withFormik } from "formik";
 import styled from "styled-components";
 
-import { createInviteMutation } from "../../Queries/Invite";
+import { CREATE_INVITE_MUTATION } from "../../Queries/Invite";
 
 const StyledButton = styled(Button)`
   && {
@@ -35,7 +35,7 @@ const Invites = ({ handleSubmit, handleChange, values, ...rest }) => (
 );
 
 export default compose(
-  graphql(createInviteMutation, {
+  graphql(CREATE_INVITE_MUTATION, {
     name: "createInviteMutation",
     options: {
       update: (proxy, { data: { createInvite } }) => {

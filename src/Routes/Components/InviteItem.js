@@ -4,7 +4,7 @@ import IconButton from "material-ui/IconButton";
 import DeleteIcon from "material-ui-icons/Delete";
 import { graphql } from "react-apollo";
 
-import { deleteInviteMutation, getAllInvites } from "../../Queries/Invite";
+import { DELETE_INVITE_MUTATION, GET_ALL_INVITES } from "../../Queries/Invite";
 
 class InviteItem extends React.Component {
   deleteInvite = () => {
@@ -31,13 +31,13 @@ class InviteItem extends React.Component {
   }
 }
 
-export default graphql(deleteInviteMutation, {
+export default graphql(DELETE_INVITE_MUTATION, {
   name: "deleteInviteMutation",
   options: {
     update: (proxy, { data: { deleteInvite } }) => {
-      const data = proxy.readQuery({ query: getAllInvites });
+      const data = proxy.readQuery({ query: GET_ALL_INVITES });
       const newInviteList = data.getAllInvites.filter(invite => invite.id !== deleteInvite.data.id);
-      proxy.writeQuery({ query: getAllInvites, data: { getAllInvites: newInviteList } });
+      proxy.writeQuery({ query: GET_ALL_INVITES, data: { getAllInvites: newInviteList } });
     },
   },
 })(InviteItem);
