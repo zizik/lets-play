@@ -68,6 +68,7 @@ export default compose(
         const { accessToken, refreshToken } = login.data;
         localStorage.setItem("token", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
+        props.history.push("/");
       } else {
         setErrors(login.errors);
       }
