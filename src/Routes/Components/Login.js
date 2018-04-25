@@ -1,26 +1,40 @@
 import React from "react";
-import { Container, Header, Input, Button, Form, Message } from "semantic-ui-react";
+// import { Container, Header, Input, Button, Form, Message } from "semantic-ui-react";
+import Input, { InputLabel } from "material-ui/Input";
+import { FormControl } from "material-ui/Form";
+import Typography from "material-ui/Typography";
+import Button from "material-ui/Button";
 import gql from "graphql-tag";
 import { graphql, compose } from "react-apollo";
 import { withFormik } from "formik";
+import styled from "styled-components";
 
-const Login = ({ submitForm, handleChange, values, errors, isSubmitting }) => (
-  <Container text>
-    <Form>
-      <Header as="h1">Login</Header>
-      {errors.length && <Message negative header="You have some propblems" list={errors} />}
-      <Form.Field>
-        <Input onChange={handleChange} value={values.email} name="email" placeholder="Email" fluid />
-      </Form.Field>
-      <Form.Field>
-        <Input onChange={handleChange} value={values.password} type="password" name="password" placeholder="Password" fluid />
-      </Form.Field>
-      <Button disabled={isSubmitting} primary onClick={submitForm}>
+const StyledButton = styled(Button)`
+  && {
+    margin-top: 15px;
+  }
+`;
+
+const Login = ({ handleSubmit, handleChange, values }) => {
+  return (
+    <form>
+      <Typography variant="title" gutterBottom align="center">
+        Login
+      </Typography>
+      <FormControl margin="normal" fullWidth>
+        <InputLabel htmlFor="email">Email</InputLabel>
+        <Input id="email" value={values.email} onChange={handleChange} />
+      </FormControl>
+      <FormControl margin="normal" fullWidth>
+        <InputLabel htmlFor="password">Password</InputLabel>
+        <Input id="password" type="password" value={values.password} onChange={handleChange} />
+      </FormControl>
+      <StyledButton onClick={handleSubmit} color="primary" variant="raised">
         Submit
-      </Button>
-    </Form>
-  </Container>
-);
+      </StyledButton>
+    </form>
+  );
+};
 
 const loginMutation = gql`
   mutation($email: String!, $password: String!) {

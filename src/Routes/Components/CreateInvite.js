@@ -15,7 +15,7 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const Invites = ({ handleSubmit, handleChange, values, ...rest }) => (
+const Invites = ({ handleSubmit, handleChange, values }) => (
   <form>
     <Typography variant="title" gutterBottom align="center">
       Create Invite
@@ -50,7 +50,7 @@ export default compose(
       description: "",
       gameId: 1,
     }),
-    handleSubmit: async (values, { props }, rest) => {
+    handleSubmit: async (values, { props }) => {
       const { data: { createInvite } } = await props.createInviteMutation({
         variables: values,
       });
