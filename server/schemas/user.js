@@ -25,7 +25,7 @@ export default `
   type LoginResponse {
     ok: Boolean!
     data: Tokens
-    errors: Error!
+    errors: Error
   }
   
   type Mutation {
