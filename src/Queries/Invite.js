@@ -19,6 +19,9 @@ export const deleteInviteMutation = gql`
   mutation($id: Int!) {
     deleteInvite(id: $id) {
       ok
+      data {
+        id
+      }
       errors {
         reason
         message

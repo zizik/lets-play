@@ -33,6 +33,9 @@ export default {
         }
         return {
           ok: true,
+          data: {
+            id,
+          },
         };
       } catch (err) {
         return {

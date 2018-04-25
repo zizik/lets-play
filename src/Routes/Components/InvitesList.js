@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import List from "material-ui/List";
 import Divider from "material-ui/Divider";
 import styled from "styled-components";
-import { graphql, compose } from "react-apollo";
+import { graphql } from "react-apollo";
 
 import InviteItem from "./InviteItem";
-import { getAllInvites, deleteInviteMutation } from "../../Queries/Invite";
+import { getAllInvites } from "../../Queries/Invite";
 
 const StyledList = styled(List)`
   width: 100%;
@@ -22,19 +22,14 @@ class InvitesList extends Component {
     }
   }
 
-  handleDeleteInvite = id => async () => {
-    const response = await this.props.deleteInviteMutation({
-      variables: { id },
-    });
-    if (response.data.deleteInvite.ok) {
-      const newList = this.state.invites.filter(invite => invite.id !== id);
-      this.setState({ invites: newList });
-    }
+  handleDeleteInvite = id => {
+    const invites = this.state.invites.filter(invite => invite.id !== id);
+    this.setState({ invites });
   };
 
   render() {
     const invitesItems = this.state.invites.map(invite => (
-      <InviteItem key={invite.id} invite={invite} handleDelete={this.handleDeleteInvite} />
+      <InviteItem key={invite.id} invite={invite} handleDeleteInvite={this.handleDeleteInvite} />
     ));
     return (
       <StyledList>
@@ -45,7 +40,4 @@ class InvitesList extends Component {
   }
 }
 
-export default compose(
-  graphql(deleteInviteMutation, { name: "deleteInviteMutation" }),
-  graphql(getAllInvites, { name: "getAllInvites" }),
-)(InvitesList);
+export default graphql(getAllInvites, { name: "getAllInvites" })(InvitesList);
