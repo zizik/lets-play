@@ -71,8 +71,8 @@ export default compose(
         props.history.push("/");
       } else {
         setErrors(login.errors);
+        setSubmitting(false);
       }
-      setSubmitting(false);
     },
   }),
 )(Login);
