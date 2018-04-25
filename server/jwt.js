@@ -8,7 +8,7 @@ export function createTokens(user, secrets) {
     },
     secrets.accessToken,
     {
-      expiresIn: "1s",
+      expiresIn: "1h",
     },
   );
 

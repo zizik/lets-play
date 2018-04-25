@@ -45,8 +45,4 @@ export default {
       }
     },
   },
-
-  // Invite: {
-  //   game: (parent, args, { models }) => models.Game.findById(parent.gameId),
-  // },
 };
