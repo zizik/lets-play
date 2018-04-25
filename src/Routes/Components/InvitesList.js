@@ -16,10 +16,9 @@ class InvitesList extends Component {
     invites: [],
   };
 
-  componentWillReceiveProps({ getAllInvites: { loading, getAllInvites: invites } }) {
-    if (!loading && this.props.getAllInvites.loading !== loading) {
-      this.setState({ invites });
-    }
+  async componentWillMount() {
+    const { data: { getAllInvites } } = await this.props.getAllInvites.refetch();
+    this.setState({ invites: getAllInvites });
   }
 
   handleDeleteInvite = id => {
