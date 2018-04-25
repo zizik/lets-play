@@ -15,26 +15,24 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const Login = ({ handleSubmit, handleChange, values }) => {
-  return (
-    <form>
-      <Typography variant="title" gutterBottom align="center">
-        Login
-      </Typography>
-      <FormControl margin="normal" fullWidth>
-        <InputLabel htmlFor="email">Email</InputLabel>
-        <Input id="email" value={values.email} onChange={handleChange} />
-      </FormControl>
-      <FormControl margin="normal" fullWidth>
-        <InputLabel htmlFor="password">Password</InputLabel>
-        <Input id="password" type="password" value={values.password} onChange={handleChange} />
-      </FormControl>
-      <StyledButton onClick={handleSubmit} color="primary" variant="raised">
-        Submit
-      </StyledButton>
-    </form>
-  );
-};
+const Login = ({ handleSubmit, handleChange, values, errors }) => (
+  <form>
+    <Typography variant="title" gutterBottom align="center">
+      Login
+    </Typography>
+    <FormControl error={errors.reason === "email"} margin="normal" fullWidth>
+      <InputLabel htmlFor="email">Email</InputLabel>
+      <Input id="email" value={values.email} onChange={handleChange} />
+    </FormControl>
+    <FormControl error={errors.reason === "password"} margin="normal" fullWidth>
+      <InputLabel htmlFor="password">Password</InputLabel>
+      <Input id="password" type="password" value={values.password} onChange={handleChange} />
+    </FormControl>
+    <StyledButton onClick={handleSubmit} color="primary" variant="raised">
+      Submit
+    </StyledButton>
+  </form>
+);
 
 const loginMutation = gql`
   mutation($email: String!, $password: String!) {
@@ -71,8 +69,7 @@ export default compose(
         localStorage.setItem("token", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
       } else {
-        const errors = login.errors.map(err => err.message);
-        setErrors(errors);
+        setErrors(login.errors);
       }
       setSubmitting(false);
     },

@@ -28,7 +28,6 @@ export default {
       try {
         const user = await models.User.findOne({ where: { email }, raw: true });
         if (!user) {
-          console.log(user);
           throw new Error(
             JSON.stringify({ reason: "email", message: "Cannot find user with this email" }),
           );
@@ -45,7 +44,7 @@ export default {
       } catch (err) {
         return {
           ok: false,
-          errors: [JSON.parse(err.message)],
+          errors: JSON.parse(err.message),
         };
       }
     },
