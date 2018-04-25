@@ -28,11 +28,14 @@ export default {
       try {
         const user = await models.User.findOne({ where: { email }, raw: true });
         if (!user) {
-          throw new Error("Cannot find user with this email");
+          console.log(user);
+          throw new Error(
+            JSON.stringify({ reason: "email", message: "Cannot find user with this email" }),
+          );
         }
         const isPasswordsEqual = await bcrypt.compare(password, user.password);
         if (!isPasswordsEqual) {
-          throw new Error("Passwords not equal");
+          throw new Error(JSON.stringify({ reason: "password", message: "Passwords not equal" }));
         }
         const tokens = await createTokens(user, SECRETS);
         return {
@@ -42,12 +45,7 @@ export default {
       } catch (err) {
         return {
           ok: false,
-          errors: [
-            {
-              reason: "login",
-              message: err.message,
-            },
-          ],
+          errors: [JSON.parse(err.message)],
         };
       }
     },
