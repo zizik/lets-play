@@ -1,9 +1,7 @@
 import bcrypt from "bcrypt";
 import moment from "moment";
 
-const expiredDate = moment(new Date())
-  .add(3, "hours")
-  .format("YYYY-MM-DD HH:mm:ss");
+const expiredDate = moment().add(3, "hours");
 
 const users = [
   { name: "test1", email: "test1@test.ru", password: "test1@test.ru" },
