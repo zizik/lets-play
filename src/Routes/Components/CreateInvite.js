@@ -31,8 +31,8 @@ const Invites = ({ handleSubmit, handleChange, values }) => (
       <Input id="gameId" value={values.gameId} onChange={handleChange} />
     </FormControl>
     <FormControl margin="normal" fullWidth>
-      <InputLabel htmlFor="expiredTime">Expired Time</InputLabel>
-      <Select id="expiredTime" name="expiredTime" value={values.expiredAt} onChange={handleChange}>
+      <InputLabel htmlFor="expiredAt">Expired Time</InputLabel>
+      <Select id="expiredAt" name="expiredAt" value={values.expiredAt} onChange={handleChange}>
         <MenuItem value={5}>5</MenuItem>
         <MenuItem value={7}>7</MenuItem>
         <MenuItem value={10}>10</MenuItem>
