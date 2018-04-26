@@ -31,8 +31,8 @@ export const DELETE_INVITE_MUTATION = gql`
 `;
 
 export const CREATE_INVITE_MUTATION = gql`
-  mutation($description: String!, $gameId: Int!) {
-    createInvite(description: $description, gameId: $gameId) {
+  mutation($description: String!, $gameId: Int!, $expiredAt: String!) {
+    createInvite(description: $description, gameId: $gameId, expiredAt: $expiredAt) {
       ok
       data {
         id

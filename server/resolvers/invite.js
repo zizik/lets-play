@@ -1,3 +1,5 @@
+import moment from "moment";
+
 import formatErrors from "../formatErrors";
 
 export default {
@@ -10,9 +12,12 @@ export default {
   Mutation: {
     createInvite: async (parent, args, { models, user }) => {
       try {
-        const invite = await models.Invite.create({ ...args, userId: user.id }).then(inv =>
-          inv.get({ plain: true }),
-        );
+        const expiredAt = moment().add(args.expiredAt, "hours");
+        const invite = await models.Invite.create({
+          ...args,
+          userId: user.id,
+          expired_at: expiredAt,
+        }).then(inv => inv.get({ plain: true }));
         const game = await models.Game.findById(invite.gameId, { raw: true });
         return {
           ok: true,
