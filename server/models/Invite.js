@@ -7,9 +7,13 @@ export default (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       },
-      expired_at: DataTypes.DATE,
+      expiredAt: {
+        type: DataTypes.DATE,
+        field: "expired_at",
+      },
     },
     {
+      undescored: true,
       timestamps: false,
     },
   );

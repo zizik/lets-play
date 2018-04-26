@@ -16,7 +16,7 @@ export default {
         const invite = await models.Invite.create({
           ...args,
           userId: user.id,
-          expired_at: expiredAt,
+          expiredAt,
         }).then(inv => inv.get({ plain: true }));
         const game = await models.Game.findById(invite.gameId, { raw: true });
         return {
