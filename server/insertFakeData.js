@@ -32,8 +32,7 @@ const inviteStatuses = [{ status: "No Likes" }, { status: "Has Likes" }];
 
 export default async models => {
   for (const user of users) {
-    const passwordHash = await bcrypt.hash(user.password, 10);
-    await models.User.create({ ...user, ...{ password: passwordHash } });
+    await models.User.create(user);
   }
   for (const game of games) {
     await models.Game.create(game);
