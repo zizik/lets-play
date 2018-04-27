@@ -18,7 +18,7 @@ class InviteItem extends React.Component {
   };
 
   render() {
-    const { name, expiredAt } = this.props.invite;
+    const { game: { name }, expiredAt } = this.props.invite;
     return (
       <ListItem button divider>
         <Avatar alt="No Game" src={noGameIcon} />
