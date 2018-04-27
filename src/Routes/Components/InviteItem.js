@@ -16,11 +16,11 @@ class InviteItem extends React.Component {
   };
 
   render() {
-    const { name } = this.props.invite;
+    const { name, expiredAt } = this.props.invite;
     return (
       <ListItem button divider>
         {/* <ListItemAvatar><GameIcon game="Overwatch" /></ListItemAvatar> */}
-        <ListItemText primary={name} secondary="24:00:00" />
+        <ListItemText primary={name} secondary={expiredAt} />
         <ListItemSecondaryAction>
           <IconButton aria-label="Delete" onClick={this.deleteInvite}>
             <DeleteIcon />

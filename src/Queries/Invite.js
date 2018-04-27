@@ -7,6 +7,7 @@ export const GET_ALL_INVITES = gql`
       userId
       description
       gameId
+      expiredAt
       game {
         name
         icon

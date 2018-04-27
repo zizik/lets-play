@@ -3,6 +3,7 @@ import List from "material-ui/List";
 import Divider from "material-ui/Divider";
 import styled from "styled-components";
 import { graphql } from "react-apollo";
+import moment from "moment";
 
 import InviteItem from "./InviteItem";
 import { GET_ALL_INVITES } from "../../Queries/Invite";
@@ -18,7 +19,11 @@ class InvitesList extends Component {
 
   async componentWillMount() {
     const { data: { getAllInvites } } = await this.props.getAllInvites.refetch();
-    this.setState({ invites: getAllInvites });
+    const invites = getAllInvites.map(invite => ({
+      ...invite,
+      ...{ expiredAt: moment(new Date(invite.expiredAt)).format("Действует до HH:MM MM/DD") },
+    }));
+    this.setState({ invites });
   }
 
   handleDeleteInvite = id => {

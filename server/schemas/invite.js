@@ -4,6 +4,7 @@ export default `
     userId: Int!
     description: String
     gameId: Int!
+    expiredAt: String!
     game: Game!
   }
 
