@@ -9,3 +9,13 @@ export const GET_ALL_GAMES = gql`
     }
   }
 `;
+
+export const GET_GAME = gql`
+  query($id: Int!) {
+    getGame(id: $id) {
+      id
+      name
+      icon
+    }
+  }
+`;

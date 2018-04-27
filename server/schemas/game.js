@@ -6,7 +6,7 @@ export default `
   }
 
   type Query {
-    getGame: Game!
+    getGame(id: Int!): Game!
     getAllGames: [Game!]!
   }
 
