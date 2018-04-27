@@ -2,9 +2,11 @@ import React from "react";
 import { ListItem, ListItemText, ListItemSecondaryAction } from "material-ui/List";
 import IconButton from "material-ui/IconButton";
 import DeleteIcon from "material-ui-icons/Delete";
+import Avatar from "material-ui/Avatar";
 import { graphql } from "react-apollo";
 
 import { DELETE_INVITE_MUTATION, GET_ALL_INVITES } from "../../Queries/Invite";
+import noGameIcon from "../../Assets/noGame.svg";
 
 class InviteItem extends React.Component {
   deleteInvite = () => {
@@ -19,7 +21,7 @@ class InviteItem extends React.Component {
     const { name, expiredAt } = this.props.invite;
     return (
       <ListItem button divider>
-        {/* <ListItemAvatar><GameIcon game="Overwatch" /></ListItemAvatar> */}
+        <Avatar alt="No Game" src={noGameIcon} />
         <ListItemText primary={name} secondary={expiredAt} />
         <ListItemSecondaryAction>
           <IconButton aria-label="Delete" onClick={this.deleteInvite}>
