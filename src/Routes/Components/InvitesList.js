@@ -21,7 +21,9 @@ class InvitesList extends Component {
     const { data: { getAllInvites } } = await this.props.getAllInvites.refetch();
     const invites = getAllInvites.map(invite => ({
       ...invite,
-      ...{ expiredAt: moment(new Date(invite.expiredAt)).format("Действует до HH:MM MM/DD") },
+      ...{
+        expiredAt: moment(new Date(invite.expiredAt)).format("Заканчивается DD.MM в HH:MM "),
+      },
     }));
     this.setState({ invites });
   }

@@ -8,6 +8,7 @@ import { MenuItem } from "material-ui/Menu";
 import { graphql, compose } from "react-apollo";
 import { withFormik } from "formik";
 import styled from "styled-components";
+import moment from "moment";
 
 import { CREATE_INVITE_MUTATION } from "../../Queries/Invite";
 
@@ -62,8 +63,9 @@ export default compose(
       expiredAt: 7,
     }),
     handleSubmit: async (values, { props }) => {
+      const expiredAt = moment().add(values.expiredAt, "hours");
       const { data: { createInvite } } = await props.createInviteMutation({
-        variables: values,
+        variables: { ...values, expiredAt },
       });
       if (createInvite.ok) {
         props.history.push("/");
