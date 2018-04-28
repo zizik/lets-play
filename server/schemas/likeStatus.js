@@ -4,8 +4,14 @@ export default `
     userId: Int!
   }
 
+  type LikeStatusResponse {
+    ok: Boolean!
+    data: [LikeStatus!]
+    errors: [Error!]
+  }
+
   type Query {
-    getLikeStatus(inviteId: Int!): Boolean!
+    getAllLikes(inviteId: Int!): LikeStatusResponse!
   }
 
   type Mutation {
