@@ -13,6 +13,7 @@ const models = {
   Game: sequelize.import("./game"),
   Invite: sequelize.import("./invite"),
   InviteStatus: sequelize.import("./inviteStatus"),
+  LikeStatus: sequelize.import("./likeStatus"),
 };
 
 Object.keys(models).forEach(modelName => {
