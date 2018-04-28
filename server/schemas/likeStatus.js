@@ -15,6 +15,6 @@ export default `
   }
 
   type Mutation {
-    createLikeStatus: Boolean!
+    createLikeStatus(inviteId: Int!): VoidResponse!
   }
 `;
