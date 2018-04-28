@@ -18,13 +18,18 @@ export default {
   },
 
   Mutation: {
-    createLikeStatus: async (parent, args, { models }) => {
+    createLikeStatus: async (parent, { inviteId }, { models, user }) => {
       try {
-        await models.LikeStatus.create({ userId: 5, inviteId: 5 });
-        return true;
+        await models.LikeStatus.create({ inviteId, userId: user.id });
+        return {
+          ok: true,
+        };
       } catch (err) {
         console.log(err);
-        return false;
+        return {
+          ok: false,
+          errors: [{ reason: "createLikeStatus", message: "Cant add like" }],
+        };
       }
     },
   },
