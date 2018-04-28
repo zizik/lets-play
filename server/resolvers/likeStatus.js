@@ -25,6 +25,12 @@ export default {
           ok: true,
         };
       } catch (err) {
+        if (err.name === "SequelizeUniqueConstraintError") {
+          return {
+            ok: false,
+            errors: [{ reason: "createLikeStatus", message: "You already like this invite" }],
+          };
+        }
         console.log(err);
         return {
           ok: false,
