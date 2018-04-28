@@ -1,4 +1,3 @@
-import bcrypt from "bcrypt";
 import moment from "moment";
 
 const expiredDate = moment().add(3, "hours");
