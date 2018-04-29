@@ -31,7 +31,7 @@ export default (sequelize, DataTypes) => {
       },
     });
     Invite.belongsToMany(models.User, {
-      through: "like_statuses",
+      through: models.LikeStatus,
       foreignKey: { name: "inviteId", field: "invite_id" },
     });
   };

@@ -48,7 +48,7 @@ export default (sequelize, DataTypes) => {
   );
   User.associate = models => {
     User.belongsToMany(models.Invite, {
-      through: "like_statuses",
+      through: models.LikeStatus,
       foreignKey: { name: "userId", field: "user_id" },
     });
   };
