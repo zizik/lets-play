@@ -27,6 +27,13 @@ const invites = [
   { userId: 4, gameId: 2, description: "No description", expiredAt: expiredDate }, // In future should be error
 ];
 
+const likeStatuses = [
+  { userId: 1, inviteId: 2 },
+  { userId: 3, inviteId: 2 },
+  { userId: 4, inviteId: 2 },
+  { userId: 5, inviteId: 2 },
+];
+
 const inviteStatuses = [{ status: "No Likes" }, { status: "Has Likes" }];
 
 export default async models => {
@@ -41,5 +48,8 @@ export default async models => {
   }
   for (const inviteStatus of inviteStatuses) {
     await models.InviteStatus.create(inviteStatus);
+  }
+  for (const likeStatus of likeStatuses) {
+    await models.LikeStatus.create(likeStatus);
   }
 };
