@@ -1,4 +1,9 @@
 export default (sequelize, DataTypes) => {
-  const InviteStatus = sequelize.define("friend", {});
-  return InviteStatus;
+  const Friend = sequelize.define("friend", {
+    userId: {
+      type: DataTypes.INTEGER,
+      field: "user_id",
+    },
+  });
+  return Friend;
 };
