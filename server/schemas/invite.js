@@ -2,10 +2,11 @@ export default `
   type Invite {
     id: Int!
     userId: Int!
-    description: String
     gameId: Int!
+    description: String
     expiredAt: String!
     game: Game!
+    usersLikes: [User!]
   }
 
   type Query {

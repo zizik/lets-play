@@ -12,6 +12,9 @@ export const GET_ALL_INVITES = gql`
         name
         icon
       }
+      usersLikes {
+        name
+      }
     }
   }
 `;

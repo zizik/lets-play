@@ -3,8 +3,21 @@ import formatErrors from "../formatErrors";
 export default {
   Query: {
     getInvite: (parent, { id }, { models }) => models.Invite.findById(id),
-    getAllInvites: (parent, args, { models, user }) =>
-      models.Invite.findAll({ where: { userId: user.id }, include: models.Game }),
+    getAllInvites: async (parent, args, { models, user }) => {
+      const invites = await models.Invite.findAll({
+        where: { userId: user.id },
+        include: [
+          {
+            model: models.Game,
+          },
+          {
+            model: models.User,
+            as: "usersLikes",
+          },
+        ],
+      });
+      return invites;
+    },
   },
 
   Mutation: {
