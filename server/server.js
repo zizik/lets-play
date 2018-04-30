@@ -65,7 +65,7 @@ app.use(
 
 app.use("/graphiql", graphiqlExpress({ endpointURL: GRAPHQL_ENDPOINT }));
 
-models.sequelize.sync({ force }).then(() => {
+models.sequelize.sync({ force, logging: false }).then(() => {
   if (force) {
     insertFakeData(models);
   }
