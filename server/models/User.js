@@ -51,6 +51,11 @@ export default (sequelize, DataTypes) => {
       through: models.LikeStatus,
       foreignKey: { name: "userId", field: "user_id" },
     });
+    User.belongsToMany(models.User, {
+      through: models.Friend,
+      as: "friends",
+      foreignKey: { name: "userId", field: "user_id" },
+    });
   };
   return User;
 };

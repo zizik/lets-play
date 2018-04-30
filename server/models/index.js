@@ -14,6 +14,7 @@ const models = {
   Invite: sequelize.import("./invite"),
   InviteStatus: sequelize.import("./inviteStatus"),
   LikeStatus: sequelize.import("./likeStatus"),
+  Friend: sequelize.import("./friend"),
 };
 
 Object.keys(models).forEach(modelName => {
