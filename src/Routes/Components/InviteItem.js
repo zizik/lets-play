@@ -1,9 +1,11 @@
 import React from "react";
 import { ListItem, ListItemText, ListItemSecondaryAction } from "material-ui/List";
+import Avatar from "material-ui/Avatar";
+import Badge from "material-ui/Badge";
 import IconButton from "material-ui/IconButton";
 import DeleteIcon from "material-ui-icons/Delete";
 import Add from "material-ui-icons/Add";
-import Avatar from "material-ui/Avatar";
+import Like from "material-ui-icons/Favorite";
 import { graphql, compose } from "react-apollo";
 
 import { DELETE_INVITE_MUTATION, GET_ALL_INVITES } from "../../Queries/Invite";
@@ -12,7 +14,6 @@ import noGameIcon from "../../Assets/noGame.svg";
 
 class InviteItem extends React.Component {
   deleteInvite = () => {
-    console.log(this.props.invite);
     const { id } = this.props.invite;
     this.props.deleteInviteMutation({
       variables: { id },
@@ -28,12 +29,18 @@ class InviteItem extends React.Component {
   };
 
   render() {
-    const { game: { name }, expiredAt } = this.props.invite;
+    console.log(this.props.invite);
+    const { game: { name }, expiredAt, usersLikes } = this.props.invite;
     return (
       <ListItem button divider>
         <Avatar alt="No Game" src={noGameIcon} />
         <ListItemText primary={name} secondary={expiredAt} />
         <ListItemSecondaryAction>
+          <IconButton>
+            <Badge badgeContent={usersLikes.length} color="primary">
+              <Like />
+            </Badge>
+          </IconButton>
           <IconButton aria-label="Delete" onClick={this.deleteInvite}>
             <DeleteIcon />
           </IconButton>
