@@ -34,6 +34,16 @@ const likeStatuses = [
   { userId: 5, inviteId: 2 },
 ];
 
+const friends = [
+  { userId: 2, friendId: 4 },
+  { userId: 2, friendId: 5 },
+  { userId: 5, friendId: 3 },
+  { userId: 4, friendId: 2 },
+  { userId: 4, friendId: 3 },
+  { userId: 2, friendId: 3 },
+  { userId: 4, friendId: 1 },
+];
+
 const inviteStatuses = [{ status: "No Likes" }, { status: "Has Likes" }];
 
 export default async models => {
@@ -51,5 +61,8 @@ export default async models => {
   }
   for (const likeStatus of likeStatuses) {
     await models.LikeStatus.create(likeStatus);
+  }
+  for (const friend of friends) {
+    await models.Friend.create(friend);
   }
 };
