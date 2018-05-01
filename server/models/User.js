@@ -53,8 +53,13 @@ export default (sequelize, DataTypes) => {
     });
     User.belongsToMany(models.User, {
       through: models.Friend,
-      foreignKey: { name: "friendId", field: "friend_id" },
+      foreignKey: { name: "userId", field: "user_id" },
       as: "friends",
+    });
+    User.belongsToMany(models.User, {
+      through: models.Friend,
+      foreignKey: { name: "friendId", field: "friend_id" },
+      as: "friends2",
     });
   };
   return User;
