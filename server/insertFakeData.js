@@ -35,11 +35,12 @@ const likeStatuses = [
 ];
 
 const friends = [
+  { userId: 1, friendId: 2 },
   { userId: 2, friendId: 4 },
+  { userId: 2, friendId: 3 },
   { userId: 2, friendId: 5 },
-  { userId: 3, friendId: 2 },
-  { userId: 4, friendId: 3 },
-  { userId: 4, friendId: 1 },
+  { userId: 3, friendId: 4 },
+  { userId: 4, friendId: 5 },
 ];
 
 const inviteStatuses = [{ status: "No Likes" }, { status: "Has Likes" }];

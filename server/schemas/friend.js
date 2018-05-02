@@ -11,6 +11,6 @@ export default `
   }
 
   type Mutation {
-    createFriend(friendId: Int!): FriendResponse!
+    createFriend(id: Int!): FriendResponse!
   }
 `;
