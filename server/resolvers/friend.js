@@ -15,8 +15,8 @@ export default {
         join friends f on f.user_id = uu.id
         join users u on u.id = f.friend_id 
         join invites i on i.user_id = uu.id
-        where u.id = 2`,
-        { type: models.sequelize.QueryTypes.SELECT },
+        where u.id = ?`,
+        { type: models.sequelize.QueryTypes.SELECT, replacements: [user.id] },
       );
       console.log(aaa);
       try {
