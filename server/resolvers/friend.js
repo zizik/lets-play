@@ -7,17 +7,20 @@ export default {
           fl.id as userId,
           fl.name as userName,
           i.id as inviteId,
-          i.game_id as gameId,
           i.description,
-          i.expired_at
+          i.expired_at,
+          g.id as gameId,
+          g.name as gameName,
+          g.icon as gameIcon
         from (
           select distinct 
-            u.id,
-            u.name
-          from friends f
-          join users u on (u.id = f.user_id or u.id = f.friend_id) and not u.id = ?
-          ) as fl 
-            join invites i on fl.id = i.user_id
+          u.id,
+          u.name
+        from friends f
+          join users u on (u.id = f.user_id or u.id = f.friend_id) and not u.id = 2
+        ) as fl 
+          join invites i on fl.id = i.user_id
+          join games g on g.id = i.game_id 
         `,
         { type: models.sequelize.QueryTypes.SELECT, replacements: [user.id] },
       );

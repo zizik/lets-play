@@ -14,9 +14,11 @@ export default `
     userid: Int!,
     username: String!,
     inviteid: Int!,
-    gameid: Int!,
     description: String!,
-    expired_at: String!
+    expired_at: String!,
+    gameid: Int!,
+    gamename: String!,
+    gameicon: String!
   }
 
   type UserFriends {
