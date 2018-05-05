@@ -1,7 +1,7 @@
 export default {
   Query: {
     getUserFriends: async (parent, args, { models, user }) => {
-      const aaa = await models.sequelize.query(
+      const friends = await models.sequelize.query(
         `
         select 
           fl.id as userId,
@@ -21,11 +21,11 @@ export default {
         `,
         { type: models.sequelize.QueryTypes.SELECT, replacements: [user.id] },
       );
-      console.log(aaa);
+      console.log(friends);
       try {
         return {
           ok: true,
-          data: aaa,
+          data: friends,
         };
       } catch (err) {
         console.log(err);
