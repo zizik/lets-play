@@ -3,19 +3,14 @@ export default {
     getUserFriends: async (parent, args, { models, user }) => {
       const aaa = await models.sequelize.query(
         `
-      select *
-        from users uu
-        join friends f on f.friend_id = uu.id
-        join users u on u.id = f.user_id 
-        join invites i on i.user_id = uu.id
-        where u.id = 2
-      union distinct
-      select *
-        from users uu
-        join friends f on f.user_id = uu.id
-        join users u on u.id = f.friend_id 
-        join invites i on i.user_id = uu.id
-        where u.id = ?`,
+        select * from (
+          select distinct 
+            u.id,
+            u.name
+          from friends f
+          join users u on (u.id = f.user_id or u.id = f.friend_id) and not u.id = 2
+        ) as fl join invites i on fl.id = i.user_id
+        `,
         { type: models.sequelize.QueryTypes.SELECT, replacements: [user.id] },
       );
       console.log(aaa);
