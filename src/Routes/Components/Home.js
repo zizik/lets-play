@@ -1,5 +1,4 @@
 import React from "react";
-import { withStyles } from "material-ui/styles";
 import ExpansionPanel, {
   ExpansionPanelSummary,
   ExpansionPanelDetails,
@@ -7,17 +6,17 @@ import ExpansionPanel, {
 import Typography from "material-ui/Typography";
 import ExpandMoreIcon from "material-ui-icons/ExpandMore";
 import Divider from "material-ui/Divider";
+import styled from "styled-components";
+
 import InviteList from "./InvitesList";
 
-const styles = theme => ({
-  root: {
-    padding: 0,
-  },
-});
+const StyledExpansionPanel = styled(ExpansionPanelDetails)`
+  && {
+    padding: 0;
+  }
+`;
 
 function Invites(props) {
-  const { classes } = props;
-
   return (
     <React.Fragment>
       <ExpansionPanel defaultExpanded>
@@ -25,21 +24,21 @@ function Invites(props) {
           <Typography>Свои приглашения</Typography>
         </ExpansionPanelSummary>
         <Divider />
-        <ExpansionPanelDetails className={classes.root}>
+        <StyledExpansionPanel>
           <InviteList />
-        </ExpansionPanelDetails>
+        </StyledExpansionPanel>
       </ExpansionPanel>
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Приглашения друзуй</Typography>
         </ExpansionPanelSummary>
         <Divider />
-        <ExpansionPanelDetails className={classes.root}>
+        <StyledExpansionPanel>
           <InviteList />
-        </ExpansionPanelDetails>
+        </StyledExpansionPanel>
       </ExpansionPanel>
     </React.Fragment>
   );
 }
 
-export default withStyles(styles)(Invites);
+export default Invites;
