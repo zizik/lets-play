@@ -7,8 +7,11 @@ import Typography from "material-ui/Typography";
 import ExpandMoreIcon from "material-ui-icons/ExpandMore";
 import Divider from "material-ui/Divider";
 import styled from "styled-components";
+import { graphql, compose } from "react-apollo";
 
 import InviteList from "./InvitesList";
+import { GET_ALL_INVITES } from "../../Queries/Invite";
+import { GET_USER_FRIENDS } from "../../Queries/Friend";
 
 const StyledExpansionPanel = styled(ExpansionPanelDetails)`
   && {
@@ -17,6 +20,10 @@ const StyledExpansionPanel = styled(ExpansionPanelDetails)`
 `;
 
 function Invites(props) {
+  const { getUserFriends, getAllInvites } = props;
+  const userInvites = !getAllInvites.loading ? getAllInvites.getAllInvites : [];
+  const friendsInvites = !getUserFriends.loading ? getUserFriends.getUserFriends.data : [];
+
   return (
     <React.Fragment>
       <ExpansionPanel defaultExpanded>
@@ -25,7 +32,7 @@ function Invites(props) {
         </ExpansionPanelSummary>
         <Divider />
         <StyledExpansionPanel>
-          <InviteList />
+          <InviteList invites={userInvites} />
         </StyledExpansionPanel>
       </ExpansionPanel>
       <ExpansionPanel>
@@ -34,11 +41,14 @@ function Invites(props) {
         </ExpansionPanelSummary>
         <Divider />
         <StyledExpansionPanel>
-          <InviteList />
+          <InviteList invites={friendsInvites} />
         </StyledExpansionPanel>
       </ExpansionPanel>
     </React.Fragment>
   );
 }
 
-export default Invites;
+export default compose(
+  graphql(GET_ALL_INVITES, { name: "getAllInvites" }),
+  graphql(GET_USER_FRIENDS, { name: "getUserFriends" }),
+)(Invites);
