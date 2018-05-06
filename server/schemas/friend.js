@@ -11,14 +11,9 @@ export default `
   }
 
   type UserFriendsResponse {
-    userid: Int!,
-    username: String!,
-    inviteid: Int!,
-    description: String!,
-    expired_at: String!,
-    gameid: Int!,
-    gamename: String!,
-    gameicon: String!
+    friend: User!
+    game: Game!
+    invite: Invite!
   }
 
   type UserFriends {

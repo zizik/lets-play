@@ -4,25 +4,25 @@ export default {
       const friends = await models.sequelize.query(
         `
         select 
-          fl.id as userId,
-          fl.name as userName,
-          i.id as inviteId,
-          i.description,
-          i.expired_at,
-          g.id as gameId,
-          g.name as gameName,
-          g.icon as gameIcon
+          fl.id as "friend.id",
+          fl.name as "friend.name",
+          i.id as "invite.id",
+          i.description as "invite.description",
+          i.expired_at as "invite.expiredAt",
+          g.id as "game.id",
+          g.name as "game.name",
+          g.icon as "game.icon"
         from (
           select distinct 
           u.id,
           u.name
         from friends f
-          join users u on (u.id = f.user_id or u.id = f.friend_id) and not u.id = 2
+          join users u on (u.id = f.user_id or u.id = f.friend_id) and not u.id = ?
         ) as fl 
           join invites i on fl.id = i.user_id
           join games g on g.id = i.game_id 
         `,
-        { type: models.sequelize.QueryTypes.SELECT, replacements: [user.id] },
+        { replacements: [user.id], nest: true },
       );
       console.log(friends);
       try {
