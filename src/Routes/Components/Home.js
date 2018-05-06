@@ -19,7 +19,7 @@ function Invites(props) {
   const { classes } = props;
 
   return (
-    <div>
+    <React.Fragment>
       <ExpansionPanel defaultExpanded>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Свои приглашения</Typography>
@@ -29,7 +29,16 @@ function Invites(props) {
           <InviteList />
         </ExpansionPanelDetails>
       </ExpansionPanel>
-    </div>
+      <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography>Приглашения друзуй</Typography>
+        </ExpansionPanelSummary>
+        <Divider />
+        <ExpansionPanelDetails className={classes.root}>
+          <InviteList />
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+    </React.Fragment>
   );
 }
 
