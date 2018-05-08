@@ -36,9 +36,9 @@ class InviteItem extends React.Component {
         <ListItemText primary={name} secondary={expiredAt} />
         <ListItemSecondaryAction>
           <IconButton>
-            <Badge badgeContent={usersLikes.length} color="primary">
+            {/* <Badge badgeContent={usersLikes.length} color="primary">
               <Like />
-            </Badge>
+            </Badge> */}
           </IconButton>
           <IconButton aria-label="Delete" onClick={this.deleteInvite}>
             <DeleteIcon />
