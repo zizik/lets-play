@@ -1,6 +1,15 @@
 import React from "react";
+import styled from "styled-components";
 
 import InvitesList from "./InvitesList";
+
+const StyledListName = styled("p")`
+  && {
+    font-size: 18px;
+    margin: 10px 0;
+    text-align: center;
+  }
+`;
 
 export default ({ listName, invites }) => {
   const friendsInvites = {};
@@ -14,7 +23,10 @@ export default ({ listName, invites }) => {
     }
   });
   const FriendsList = Object.keys(friendsInvites).map(key => (
-    <InvitesList key={key} listName={key} invites={friendsInvites[key]} />
+    <div key={key}>
+      <StyledListName>{key}</StyledListName>
+      <InvitesList listName={key} invites={friendsInvites[key]} />
+    </div>
   ));
   return <div> {FriendsList}</div>;
 };

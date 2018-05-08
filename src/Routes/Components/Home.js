@@ -1,6 +1,7 @@
 import React from "react";
 import { graphql, compose } from "react-apollo";
 
+import ListWrapper from "./ListWrapper";
 import InviteList from "./InvitesList";
 import FriendsInviteList from "./FriendsInviteList";
 import { GET_ALL_INVITES } from "../../Queries/Invite";
@@ -10,13 +11,15 @@ function Invites(props) {
   const { getUserFriends, getAllInvites } = props;
   const userInvites = !getAllInvites.loading ? getAllInvites.getAllInvites : [];
   const friendsInvites = !getUserFriends.loading ? getUserFriends.getUserFriends.data : [];
-  console.log(userInvites);
-  // console.log(userInvites, friendsInvites);
 
   return (
     <React.Fragment>
-      <InviteList listName="Свои приглашения" invites={userInvites} />
-      <FriendsInviteList listName="Приглашения друзей" invites={friendsInvites} />
+      <ListWrapper listName="Свои приглашения" expanded>
+        <InviteList invites={userInvites} />
+      </ListWrapper>
+      <ListWrapper listName="Приглашения друзей">
+        <FriendsInviteList invites={friendsInvites} />
+      </ListWrapper>
     </React.Fragment>
   );
 }

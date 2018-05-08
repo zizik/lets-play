@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import List from "material-ui/List";
-import Typography from "material-ui/Typography";
-import ExpandMoreIcon from "material-ui-icons/ExpandMore";
 import Divider from "material-ui/Divider";
-import ExpansionPanel, {
-  ExpansionPanelSummary,
-  ExpansionPanelDetails,
-} from "material-ui/ExpansionPanel";
+import { ExpansionPanelDetails } from "material-ui/ExpansionPanel";
 import styled from "styled-components";
 import moment from "moment";
 
@@ -48,23 +43,16 @@ class InvitesList extends Component {
   };
 
   render() {
-    const { listName } = this.props;
     const invitesItems = this.state.invites.map(invite => (
       <InviteItem key={invite.id} invite={invite} handleDeleteInvite={this.handleDeleteInvite} />
     ));
     return (
-      <ExpansionPanel defaultExpanded>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>{listName}</Typography>
-        </ExpansionPanelSummary>
-        <Divider />
-        <StyledExpansionPanel>
-          <StyledList>
-            <Divider light />
-            {invitesItems}
-          </StyledList>
-        </StyledExpansionPanel>
-      </ExpansionPanel>
+      <StyledExpansionPanel>
+        <StyledList>
+          <Divider light />
+          {invitesItems}
+        </StyledList>
+      </StyledExpansionPanel>
     );
   }
 }
