@@ -29,7 +29,6 @@ class InviteItem extends React.Component {
   };
 
   render() {
-    console.log(this.props.invite);
     const { game: { name }, expiredAt, usersLikes } = this.props.invite;
     return (
       <ListItem button divider>

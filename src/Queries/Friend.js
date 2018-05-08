@@ -1,18 +1,24 @@
 import gql from "graphql-tag";
 
+// eslint-disable-next-line import/prefer-default-export
 export const GET_USER_FRIENDS = gql`
   query {
     getUserFriends {
       ok
       data {
-        userid
-        username
-        inviteid
-        description
-        expired_at
-        gameid
-        gamename
-        gameicon
+        friend {
+          id
+          name
+        }
+        invite {
+          id
+          description
+          expiredAt
+        }
+        game {
+          name
+          icon
+        }
       }
     }
   }
