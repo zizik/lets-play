@@ -4,9 +4,7 @@ export const GET_ALL_INVITES = gql`
   query {
     getAllInvites {
       id
-      userId
       description
-      gameId
       expiredAt
       game {
         name
