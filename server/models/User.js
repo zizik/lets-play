@@ -47,6 +47,13 @@ export default (sequelize, DataTypes) => {
     },
   );
   User.associate = models => {
+    User.hasMany(models.Invite, {
+      foreignKey: {
+        name: "userId",
+        field: "user_id",
+      },
+      as: "invites",
+    });
     User.belongsToMany(models.Invite, {
       through: models.LikeStatus,
       foreignKey: { name: "userId", field: "user_id" },
@@ -54,7 +61,7 @@ export default (sequelize, DataTypes) => {
     User.belongsToMany(models.User, {
       through: models.Friend,
       foreignKey: { name: "userId", field: "user_id" },
-      as: "friends",
+      as: "friends1",
     });
     User.belongsToMany(models.User, {
       through: models.Friend,
