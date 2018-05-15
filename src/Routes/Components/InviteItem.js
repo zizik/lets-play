@@ -1,13 +1,11 @@
 import React from "react";
 import { ListItem, ListItemText, ListItemSecondaryAction } from "material-ui/List";
 import Avatar from "material-ui/Avatar";
-import Badge from "material-ui/Badge";
 import IconButton from "material-ui/IconButton";
 import DeleteIcon from "material-ui-icons/Delete";
-import Add from "material-ui-icons/Add";
-import Like from "material-ui-icons/Favorite";
 import { graphql, compose } from "react-apollo";
 
+import Like from "./Like";
 import { DELETE_INVITE_MUTATION, GET_ALL_INVITES } from "../../Queries/Invite";
 import { ADD_LIKE_STATUS } from "../../Queries/LikeStatus";
 import noGameIcon from "../../Assets/noGame.svg";
@@ -21,8 +19,9 @@ class InviteItem extends React.Component {
     this.props.handleDeleteInvite(id);
   };
 
-  addLike = () => {
+  handleAddLikeStatus = () => {
     const { id } = this.props.invite;
+    console.log(this.props);
     this.props.addLikeStatus({
       variables: { inviteId: id },
     });
@@ -35,16 +34,9 @@ class InviteItem extends React.Component {
         <Avatar alt="No Game" src={noGameIcon} />
         <ListItemText primary={name} secondary={expiredAt} />
         <ListItemSecondaryAction>
-          <IconButton>
-            <Badge badgeContent={usersLikes.length} color="primary">
-              <Like />
-            </Badge>
-          </IconButton>
+          <Like likes={usersLikes} addLikeStatus={this.handleAddLikeStatus} />
           <IconButton aria-label="Delete" onClick={this.deleteInvite}>
             <DeleteIcon />
-          </IconButton>
-          <IconButton aria-label="Add" onClick={this.addLike}>
-            <Add />
           </IconButton>
         </ListItemSecondaryAction>
       </ListItem>
