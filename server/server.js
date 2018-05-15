@@ -17,6 +17,7 @@ const SECRETS = {
   refreshToken: "auihe9f8h23rh2bfk23k3b2",
 };
 
+// const force = true;
 const force = false;
 
 const typeDefs = mergeTypes(fileLoader(path.join(__dirname, "./schemas")));

@@ -11,22 +11,12 @@ const StyledListName = styled("p")`
   }
 `;
 
-export default ({ listName, invites }) => {
-  const friendsInvites = {};
-  invites.forEach(invite => {
-    const { name } = invite.friend;
-    const userInvite = { ...invite.invite, ...{ game: invite.game } };
-    if (friendsInvites[name]) {
-      friendsInvites[name].push(userInvite);
-    } else {
-      friendsInvites[name] = [userInvite];
-    }
-  });
-  const FriendsList = Object.keys(friendsInvites).map(key => (
-    <div key={key}>
-      <StyledListName>{key}</StyledListName>
-      <InvitesList listName={key} invites={friendsInvites[key]} />
+export default ({ listName, friends }) => {
+  const FriendsList = friends.map(friend => (
+    <div key={`friend-${friend.id}`}>
+      <StyledListName>{friend.name}</StyledListName>
+      <InvitesList invites={friend.invites} />
     </div>
   ));
-  return <div> {FriendsList}</div>;
+  return <React.Fragment> {FriendsList}</React.Fragment>;
 };

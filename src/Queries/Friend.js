@@ -6,18 +6,19 @@ export const GET_USER_FRIENDS = gql`
     getUserFriends {
       ok
       data {
-        friend {
-          id
-          name
-        }
-        invite {
+        id
+        name
+        invites {
           id
           description
           expiredAt
-        }
-        game {
-          name
-          icon
+          game {
+            name
+            icon
+          }
+          usersLikes {
+            id
+          }
         }
       }
     }
