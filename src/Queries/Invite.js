@@ -11,7 +11,7 @@ export const GET_ALL_INVITES = gql`
         icon
       }
       usersLikes {
-        name
+        id
       }
     }
   }

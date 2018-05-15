@@ -20,7 +20,6 @@ const StyledExpansionPanel = styled(ExpansionPanelDetails)`
 class InvitesList extends Component {
   static defaultProps = {
     invites: [],
-    listName: "",
   };
 
   state = {

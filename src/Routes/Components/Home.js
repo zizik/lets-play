@@ -18,7 +18,7 @@ function Invites(props) {
         <InviteList invites={userInvites} />
       </ListWrapper>
       <ListWrapper listName="Приглашения друзей">
-        <FriendsInviteList invites={friendsInvites} />
+        <FriendsInviteList friends={friendsInvites} />
       </ListWrapper>
     </React.Fragment>
   );

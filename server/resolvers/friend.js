@@ -29,8 +29,8 @@ export default {
           user_friends.name as "name",
           friends_invites.invite_id as "invites.id",
           friends_invites.game_id as "invites.gameId",
-          friends_invites.description as "invites.description",
           friends_invites.expired_at as "invites.expiredAt",
+          friends_invites.description as "invites.description",
           friends_invites.name as "invites.game.name",
           friends_invites.icon as "invites.game.icon",
           friends_invites.user_liked as "invites.usersLikes.id"
@@ -39,7 +39,7 @@ export default {
 
         const options = {
           hasJoin: true,
-          replacements: { id: 2 },
+          replacements: { id: user.id },
           model: models.User,
           include: [
             {
